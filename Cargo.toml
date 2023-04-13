@@ -7,5 +7,4 @@ edition = "2021"
 
 [dependencies]
 glam = "0.23.0"
-# https://docs.rs/glam/0.23.0/glam/f32/struct.Vec3.html#
 
