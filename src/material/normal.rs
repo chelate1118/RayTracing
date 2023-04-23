@@ -1,7 +1,5 @@
 use glam::Vec3;
-
 use crate::ray::Ray;
-
 use super::Material;
 
 #[derive(Clone, Copy)]
