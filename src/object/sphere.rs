@@ -1,7 +1,10 @@
+#![allow(dead_code)]
+
 use glam::Vec3;
 use crate::ray::Ray;
 use super::Object;
 
+#[derive(Clone, Copy)]
 pub struct Sphere {
     center: Vec3,
     radius: f32
@@ -14,7 +17,7 @@ impl Sphere {
 }
 
 impl Object for Sphere {
-    fn reach_point(&self, ray: &Ray) -> Option<Vec3> {
+    fn reach_point(&self, ray: Ray) -> Option<Vec3> {
         let source_to_center: Vec3 = self.center - ray.get_source();
 
         let light_dist: f32 = source_to_center
@@ -43,6 +46,7 @@ impl Object for Sphere {
 }
 
 mod test_sphere {
+    #![allow(unused_imports)]
     use glam::Vec3;
     use crate::object::Object;
     use crate::object::sphere::Sphere;
@@ -63,9 +67,9 @@ mod test_sphere {
             1.0
         );
 
-        assert_eq!(Some(Vec3::new(1.0, 0.0, 0.0)), sphere.reach_point(&ray));
-        assert_eq!(None, sphere.reach_point(&ray2));
-        assert_eq!(None, sphere2.reach_point(&ray));
-        assert_eq!(None, sphere2.reach_point(&ray2));
+        assert_eq!(Some(Vec3::new(1.0, 0.0, 0.0)), sphere.reach_point(ray));
+        assert_eq!(None, sphere.reach_point(ray2));
+        assert_eq!(None, sphere2.reach_point(ray));
+        assert_eq!(None, sphere2.reach_point(ray2));
     }
 }

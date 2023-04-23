@@ -1,5 +1,8 @@
+#![allow(unused_variables)]
+
 mod object;
 mod ray;
+mod material;
 
 use glam::Vec3;
 
@@ -10,7 +13,7 @@ impl HyperParameter {
 }
 
 fn main() {
-    let v31 = Vec3::X;
+    let v31 = Vec3::X; 
     let v32 = Vec3::new(2.0, 3.0, 1.0);
 
     println!("{}", Vec3::normalize(v32));

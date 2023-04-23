@@ -1,6 +1,9 @@
+#![allow(dead_code)]
+
 use glam::Vec3;
 
-pub struct Ray {
+#[derive(Clone, Copy)]
+pub(crate) struct Ray {
     source: Vec3,
     direction: Vec3,
     bright: f32
