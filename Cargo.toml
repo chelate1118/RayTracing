@@ -14,3 +14,6 @@ rand_distr = "0.4.3"
 
 # https://docs.rs/rand/0.8.5/rand/
 rand = "0.8.5"
+
+# https://docs.rs/serde_json/latest/serde_json/
+serde_json = "1.0.96"
