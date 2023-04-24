@@ -1,6 +1,6 @@
 use glam::Vec3;
 
-use crate::{ray::Ray, color::Color};
+use crate::{ray::Ray, material::color::Color};
 use super::Material;
 
 #[derive(Clone, Copy)]

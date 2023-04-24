@@ -3,7 +3,7 @@
 mod object;
 mod ray;
 mod material;
-mod color;
+mod world;
 mod test;
 
 use glam::Vec3;

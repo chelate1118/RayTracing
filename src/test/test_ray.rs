@@ -1,7 +1,7 @@
 #![allow(unused_imports)]
 
 use glam::Vec3;
-use crate::{ray::{Optics, RayColor}, color::Color};
+use crate::{ray::{Optics, RayColor}, material::color::Color};
 
 #[test]
 fn test_reflect_color() {

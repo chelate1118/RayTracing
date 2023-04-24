@@ -1,6 +1,6 @@
 use glam::Vec3;
 use rand_distr::Normal as Gaussian;
-use crate::{ray::{Ray, Optics}, color::Color};
+use crate::{ray::{Ray, Optics}, material::color::Color};
 use super::Material;
 
 #[derive(Clone, Copy)]

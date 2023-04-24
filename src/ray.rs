@@ -2,7 +2,7 @@
 
 use glam::Vec3;
 use rand_distr::{Normal as Gaussian, Distribution};
-use crate::color::Color;
+use crate::material::color::Color;
 use std::f32::*;
 
 #[derive(Clone, Copy)]
