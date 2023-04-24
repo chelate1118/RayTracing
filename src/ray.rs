@@ -10,13 +10,13 @@ pub(crate) struct Ray {
     pub(crate) source: Vec3,
     pub(crate) direction: Vec3,
     pub(crate) color: RayColor,
-    pub(crate) light_source: bool,
+    pub(crate) reached_light: bool,
     pub(crate) reflect_count: u32,
 }
 
 impl Ray {
     pub(crate) fn new(source: Vec3, direction: Vec3, color: RayColor) -> Self {
-        return Ray { source, direction, color, light_source: false, reflect_count: 0 };
+        return Ray { source, direction, color, reached_light: false, reflect_count: 0 };
     }
 }
 
@@ -28,6 +28,10 @@ pub(crate) enum RayColor {
 }
 
 impl RayColor {
+    const RED: RayColor = RayColor::R(1.0);
+    const GREEN: RayColor = RayColor::G(1.0);
+    const BLUE: RayColor = RayColor::B(1.0);
+
     pub(crate) fn mix_color(&self, surface_color: Color) -> RayColor {
         match self {
             RayColor::R(r) => RayColor::R(r * surface_color.r),
