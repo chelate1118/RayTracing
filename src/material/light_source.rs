@@ -24,7 +24,7 @@ impl Material for LightSource {
             source: point,
             direction: ray.direction,
             color: ray.color.mix_color(self.color),
-            light_source: true,
+            reached_light: true,
             reflect_count: 0
         }
     }

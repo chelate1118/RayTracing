@@ -27,7 +27,7 @@ impl Material for Normal {
         let source = point;
         let mut direction = ray.direction.reflect_from(normal);
         let color = ray.color.mix_color(self.color);
-        let light_source = ray.light_source;
+        let light_source = ray.reached_light;
         let reflect_count = ray.reflect_count + 1;
         
         direction = direction.dispersion(self.rough);
@@ -39,7 +39,7 @@ impl Material for Normal {
             source,
             direction,
             color,
-            light_source,
+            reached_light: light_source,
             reflect_count
         }
     }
