@@ -10,8 +10,7 @@ use glam::Vec3;
 
 pub struct HyperParameter {}
 impl HyperParameter {
-    #[allow(dead_code)]
-    const REFLECTION_COUNT: i32 = 2;
+    const REFLECTION_COUNT: u32 = 2;
 }
 
 fn main() {
