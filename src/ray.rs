@@ -19,8 +19,8 @@ impl Ray {
         return Ray { source, direction, color, reached_light: false, reflect_count: 0 };
     }
 
-    pub(crate) fn is_done(ray: Ray) -> bool {
-        ray.reflect_count >= crate::HyperParameter::REFLECTION_COUNT || ray.reached_light
+    pub(crate) fn is_done(&self) -> bool {
+        self.reflect_count >= crate::HyperParameter::REFLECTION_COUNT || self.reached_light
     }
 }
 
