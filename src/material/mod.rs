@@ -5,7 +5,7 @@ use glam::Vec3;
 use crate::ray::Ray;
 
 mod normal;
-mod lightsource;
+mod light_source;
 
 pub(crate) trait Material {
     fn reflect(&self, ray: Ray, normal: Vec3, point: Vec3) -> Ray;

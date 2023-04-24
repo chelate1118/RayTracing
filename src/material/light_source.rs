@@ -10,7 +10,7 @@ pub(crate) struct LightSource {
 
 impl LightSource {
     pub(crate) fn new(color: Color) -> Self {
-        if color.r < 1.0 || color.g < 1.0 || color.b < 1.0 {
+        if color.r < 1.0 && color.g < 1.0 && color.b < 1.0 {
             panic!("Light Source should be bright");
         }
 
