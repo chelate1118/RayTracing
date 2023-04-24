@@ -18,6 +18,10 @@ impl Ray {
     pub(crate) fn new(source: Vec3, direction: Vec3, color: RayColor) -> Self {
         return Ray { source, direction, color, reached_light: false, reflect_count: 0 };
     }
+
+    pub(crate) fn is_done(ray: Ray) -> bool {
+        ray.reflect_count >= crate::HyperParameter::REFLECTION_COUNT || ray.reached_light
+    }
 }
 
 #[derive(Clone, Copy, PartialEq, Debug)]
