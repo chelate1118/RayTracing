@@ -4,6 +4,7 @@ mod object;
 mod ray;
 mod material;
 mod world;
+mod camera;
 mod test;
 
 use glam::Vec3;
@@ -14,9 +15,10 @@ impl HyperParameter {
 }
 
 fn main() {
-    let v31 = Vec3::X; 
-    let v32 = Vec3::new(2.0, 3.0, 1.0);
-
-    println!("{}", Vec3::normalize(v32));
-    println!("{}", v32);
+    let world = world::World { objects: Vec::new() };
+    world.start_ray(ray::Ray::new(
+        Vec3::ZERO,
+        Vec3::X,
+        ray::RayColor::RED
+    ))
 }
