@@ -15,7 +15,7 @@ pub(crate) trait Object {
         )
     }
 
-    fn reflect_from(&self, ray: Ray) -> Ray {
+    fn reflect(&self, ray: Ray) -> Ray {
         self.get_material().reflect(
             ray,
             self.reach_normal(ray),
