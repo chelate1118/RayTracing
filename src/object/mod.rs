@@ -1,9 +1,9 @@
-mod sphere;
-mod plane;
+pub(crate) mod sphere;
+pub(crate) mod plane;
 
 use crate::ray::Ray;
 use glam::Vec3;
 
-trait Object {
+pub(crate) trait Object {
     fn reach_point(&self, ray: Ray) -> Option<Vec3>;
 }

@@ -8,5 +8,5 @@ mod normal;
 mod lightsource;
 
 pub(crate) trait Material {
-    fn reflect(&self, ray: Ray, normal: Vec3) -> Ray;
+    fn reflect(&self, ray: Ray, normal: Vec3, point: Vec3) -> Ray;
 }
