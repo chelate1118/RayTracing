@@ -28,9 +28,9 @@ pub(crate) enum RayColor {
 }
 
 impl RayColor {
-    const RED: RayColor = RayColor::R(1.0);
-    const GREEN: RayColor = RayColor::G(1.0);
-    const BLUE: RayColor = RayColor::B(1.0);
+    pub(crate) const RED: RayColor = RayColor::R(1.0);
+    pub(crate) const GREEN: RayColor = RayColor::G(1.0);
+    pub(crate) const BLUE: RayColor = RayColor::B(1.0);
 
     pub(crate) fn mix_color(&self, surface_color: Color) -> RayColor {
         match self {
