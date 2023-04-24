@@ -1,7 +1,25 @@
-#[test]
-fn test_reflect() {
-    let normal = Vec3::Z;
-    let input = Vec3::new(1.0, 1.0, 2.0);
+#![allow(unused_imports)]
 
-    assert_eq!(input.reflect_from(normal), Vec3::new(-1.0, -1.0, 2.0));
+use glam::Vec3;
+use crate::{ray::{Optics, RayColor}, color::Color};
+
+#[test]
+fn test_reflect_color() {
+    let ray_color_r = RayColor::R(40.0);
+    let ray_color_g = RayColor::G(40.0);
+    let ray_color_b = RayColor::B(40.0);
+
+    let surface_color = Color::new(0.25, 0.5, 1.0);
+
+    assert_eq!(ray_color_r.mix_color(surface_color), RayColor::R(10.0));
+    assert_eq!(ray_color_g.mix_color(surface_color), RayColor::G(20.0));
+    assert_eq!(ray_color_b.mix_color(surface_color), RayColor::B(40.0));
+}
+
+#[test]
+fn test_reflect_direction() {
+    let normal = Vec3::Z;
+    let ray_direction = Vec3::new(1.0, 1.0, 2.0);
+
+    assert_eq!(ray_direction.reflect_from(normal), Vec3::new(-1.0, -1.0, 2.0));
 }
