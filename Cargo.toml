@@ -9,3 +9,8 @@ edition = "2021"
 # https://docs.rs/glam/latest/glam/
 glam = "0.23.0"
 
+# https://rust-random.github.io/rand/rand_distr/index.html#
+rand_distr = "0.4.3"
+
+# https://docs.rs/rand/0.8.5/rand/
+rand = "0.8.5"
