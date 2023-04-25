@@ -1,7 +1,6 @@
 use glam::Vec3;
 use serde::{Serialize, Deserialize};
 
-#[derive(PartialEq, Debug)]
 pub(crate) struct Camera {
     pub(crate) position: Vec3,
     pub(crate) direction: Vec3,
