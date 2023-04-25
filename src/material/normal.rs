@@ -46,5 +46,5 @@ impl Material for Normal {
 }
 
 fn is_valid_reflect(before: Vec3, after: Vec3, normal: Vec3) -> bool {
-    return before.dot(normal) * after.dot(normal) < 0.0;
+    before.dot(normal) * after.dot(normal) < 0.0
 }

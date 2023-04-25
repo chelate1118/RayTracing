@@ -72,7 +72,7 @@ impl Sphere {
 
         let reach_vector: Vec3 = normalized_dir * reach_distance;
 
-        return Some(ray.source + reach_vector);
+        Some(ray.source + reach_vector)
     }
 
     pub(crate) fn reach_normal(&self, ray: Ray) -> Vec3 {

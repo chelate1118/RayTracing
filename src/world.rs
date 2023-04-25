@@ -16,7 +16,7 @@ impl World {
         }
     }
 
-    fn reach_object(&self, ray: Ray) -> Option<&Box<dyn Object>> {
+    fn reach_object(&self, ray: Ray) -> Option<&dyn Object> {
         let mut reach_object = None;
         let mut min_distance = std::f32::MAX;
         for object in self.objects.iter() {
@@ -28,6 +28,8 @@ impl World {
             }
         }
 
-        reach_object
+        reach_object.map(
+            |obj| obj.as_ref()
+        )
     }
 }

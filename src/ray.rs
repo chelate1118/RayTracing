@@ -16,7 +16,7 @@ pub(crate) struct Ray {
 
 impl Ray {
     pub(crate) fn new(source: Vec3, direction: Vec3, color: RayColor) -> Self {
-        return Ray { source, direction, color, reached_light: false, reflect_count: 0 };
+        Ray { source, direction, color, reached_light: false, reflect_count: 0 }
     }
 
     pub(crate) fn is_done(&self) -> bool {
@@ -52,7 +52,7 @@ pub(crate) trait Optics {
 
 impl Optics for Vec3 {
     fn reflect_from(self, normal: Vec3) -> Self {
-        return self - self.reject_from(normal) * 2.0
+        self - self.reject_from(normal) * 2.0
     }
 
     fn dispersion(self, rough: Gaussian<f32>) -> Self {
@@ -65,6 +65,6 @@ impl Optics for Vec3 {
         let x_coor = r_disp * angle.sin() * self.abs();
         let y_coor = r_disp * angle.cos() * self.abs();
 
-        return self + x_coor * unit_x + y_coor * unit_y;
+        self + x_coor * unit_x + y_coor * unit_y
     }
 }

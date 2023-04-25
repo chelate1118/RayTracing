@@ -9,6 +9,6 @@ pub(crate) struct Color {
 
 impl Color {
     pub(crate) fn new(r: f32, g: f32, b: f32) -> Self {
-        return Color { r, g, b }; 
+        Color { r, g, b }
     }
 }
