@@ -28,8 +28,6 @@ impl World {
             }
         }
 
-        reach_object.map(
-            |obj| obj.as_ref()
-        )
+        reach_object.map(Box::as_ref)
     }
 }
