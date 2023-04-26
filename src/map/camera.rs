@@ -2,7 +2,7 @@ use glam::Vec3;
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
 
-use crate::{map::world::World, ray::{RayColor, Ray}};
+use crate::{map::world::World, ray::{RayColor, Ray}, loader::FromValue};
 
 pub(crate) struct Camera {
     pub(crate) position: Vec3,
@@ -14,8 +14,8 @@ pub(crate) struct Camera {
     pub(crate) screen_unit_y: Vec3
 }
 
-impl Camera {
-    pub(crate) fn from_value(value: Value) -> Result<Self, serde_json::Error> {
+impl FromValue for Camera {
+    fn from_value(value: Value) -> serde_json::Result<Self>{
         let ci: CameraInfo = serde_json::from_value(value)?;
 
         let pi = ci.pi.to_radians();
@@ -31,7 +31,9 @@ impl Camera {
             screen_unit_y: Self::get_unit_y(ci)
         })
     }
+}
 
+impl Camera {
     pub(crate) fn start_ray(
         &self,
         world: World,

@@ -3,6 +3,7 @@ fn load_camera() {
     use crate::loader;
     use crate::map::camera::Camera;
     use super::assert_eq_vec3;
+    use crate::loader::FromValue;
 
     let camera = Camera::from_value(
         loader::str_to_value(r#"{
