@@ -1,7 +1,8 @@
 use glam::Vec3;
 use serde::{Serialize, Deserialize};
+use serde_json::Value;
 
-use crate::{world::World, ray::{RayColor, Ray}};
+use crate::{map::world::World, ray::{RayColor, Ray}};
 
 pub(crate) struct Camera {
     pub(crate) position: Vec3,
@@ -14,13 +15,13 @@ pub(crate) struct Camera {
 }
 
 impl Camera {
-    pub(crate) fn from_str(json: &str) -> Self {
-        let ci = CameraInfo::from_str(json);
+    pub(crate) fn from_value(value: Value) -> Result<Self, serde_json::Error> {
+        let ci: CameraInfo = serde_json::from_value(value)?;
 
         let pi = ci.pi.to_radians();
         let theta = ci.theta.to_radians();
 
-        Camera {
+        Ok(Camera {
             position: Vec3::new(ci.x, ci.y, ci.z),
             direction: Self::get_direction(ci),
             width: ci.width,
@@ -28,7 +29,7 @@ impl Camera {
             distance: ci.distance,
             screen_unit_x: Self::get_unit_x(ci),
             screen_unit_y: Self::get_unit_y(ci)
-        }
+        })
     }
 
     pub(crate) fn start_ray(
