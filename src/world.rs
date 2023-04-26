@@ -5,7 +5,7 @@ pub(crate) struct World {
 }
 
 impl World {
-    pub(crate) fn start_ray(&self, ray: Ray) {
+    pub(crate) fn start_ray(&self, ray: Ray) -> Ray {
         let mut ray = ray;
 
         while !ray.is_done() {
@@ -14,6 +14,8 @@ impl World {
                 None => break
             }
         }
+
+        ray
     }
 
     fn reach_object(&self, ray: Ray) -> Option<&dyn Object> {
