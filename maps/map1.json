@@ -1,0 +1,23 @@
+{
+    "camera": {
+        "x": -100.0,
+        "y": 0.0,
+        "z": 100.0,
+        "pi": 0.0,
+        "theta:": 120.0,
+        "width": 1200,
+        "height": 800,
+        "distance": 400.0
+    },
+    "object": {
+        "plane": [
+
+        ],
+        "normal_sphere": [
+
+        ],
+        "light_sphere": [
+
+        ]
+    }
+}
