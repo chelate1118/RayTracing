@@ -9,8 +9,8 @@ pub(crate) struct Camera {
     pub(crate) width: usize,
     pub(crate) height: usize,
     pub(crate) distance: f32,
-    screen_unit_x: Vec3,
-    screen_unit_y: Vec3
+    pub(crate) screen_unit_x: Vec3,
+    pub(crate) screen_unit_y: Vec3
 }
 
 impl Camera {
@@ -79,7 +79,7 @@ impl Camera {
     fn get_unit_y(ci: CameraInfo) -> Vec3 {
         Vec3::cross(
             Self::get_direction(ci),
-            Vec3::X,
+            Self::get_unit_x(ci),
         ).normalize()
     }
 }
