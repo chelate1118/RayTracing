@@ -1,5 +1,5 @@
 #![allow(dead_code)]
 
-struct Plane {
+pub(crate) struct Plane {
 
 }
