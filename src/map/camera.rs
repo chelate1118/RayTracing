@@ -96,14 +96,3 @@ struct CameraInfo {
     height: usize,
     distance: f32
 }
-
-impl CameraInfo {
-    fn from_str(json: &str) -> Self {
-        let ret: CameraInfo = serde_json::from_str(json).unwrap();
-        
-        assert!(ret.width % 2 == 0);
-        assert!(ret.height % 2 == 0);
-
-        ret
-    }
-}
