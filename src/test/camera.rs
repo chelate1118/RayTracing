@@ -1,18 +1,21 @@
 #[test]
 fn load_camera() {
-    use crate::camera::Camera;
+    use crate::loader;
+    use crate::map::camera::Camera;
     use super::assert_eq_vec3;
 
-    let camera = Camera::from_str(r#"{
-        "x": 10.0,
-        "y": 5.0,
-        "z": 3.0,
-        "pi": 45.0,
-        "theta": 45.0,
-        "width": 1200,
-        "height": 800,
-        "distance": 400.0
-    }"#);
+    let camera = Camera::from_value(
+        loader::str_to_value(r#"{
+            "x": 10.0,
+            "y": 5.0,
+            "z": 3.0,
+            "pi": 45.0,
+            "theta": 45.0,
+            "width": 1200,
+            "height": 800,
+            "distance": 400.0
+        }"#).unwrap()
+    ).unwrap();
 
     assert_eq_vec3!(
         camera.position,

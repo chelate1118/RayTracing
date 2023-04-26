@@ -1,5 +1,8 @@
+use std::str::FromStr;
 use glam::Vec3;
 use rand_distr::Normal as Gaussian;
+use serde::{Serialize, Deserialize};
+use serde_json::Value;
 use crate::{ray::{Ray, Optics}, material::color::Color};
 use super::Material;
 
@@ -10,6 +13,12 @@ pub(crate) struct Normal {
 }
 
 impl Normal {
+    fn from_value(value: Value) -> Result<Self, serde_json::Error> {
+        let ni: NormalInfo = serde_json::from_value(value)?;
+
+        Ok(Self::new(ni.color, ni.rough))
+    }
+
     pub(crate) fn new(color: Color, rough: f32) -> Self {
         if color.r > 1.0 || color.g > 1.0 || color.b > 1.0 {
             panic!("Normal surface color value must be less than 1.0.");
@@ -47,4 +56,10 @@ impl Material for Normal {
 
 fn is_valid_reflect(before: Vec3, after: Vec3, normal: Vec3) -> bool {
     before.dot(normal) * after.dot(normal) < 0.0
+}
+
+#[derive(Serialize, Deserialize)]
+pub(crate) struct NormalInfo {
+    rough: f32,
+    color: Color
 }
