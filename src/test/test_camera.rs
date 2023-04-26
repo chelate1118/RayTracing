@@ -1,9 +1,7 @@
 #[test]
-fn test_load_camera() {
-    use::glam::Vec3;
+fn load_camera() {
     use crate::camera::Camera;
-
-    const APPROXIMATE_VALUE: f32 = 1e-6;
+    use super::assert_eq_vec3;
 
     let camera = Camera::from_str(r#"{
         "x": 10.0,
@@ -12,20 +10,40 @@ fn test_load_camera() {
         "pi": 45.0,
         "theta": 45.0,
         "width": 1200,
-        "height": 800
+        "height": 800,
+        "distance": 400.0
     }"#);
 
-    assert!(
-        Vec3::distance(
-            camera.position, Vec3::new(10.0, 5.0, 3.0)
-        ) < APPROXIMATE_VALUE
+    assert_eq_vec3!(
+        camera.position,
+        Vec3::new(10.0, 5.0, 3.0)
     );
 
-    assert!(
-        Vec3::distance(
-            camera.direction, Vec3::new(0.5f32, 0.5f32, 0.5f32.sqrt())
-        ) < APPROXIMATE_VALUE
+    assert_eq_vec3!(
+        camera.direction,
+        Vec3::new(0.5f32, 0.5f32, 0.5f32.sqrt())
     );
 
     assert_eq!((camera.width, camera.height), (1200usize, 800usize));
+    assert_eq!(camera.distance, 400f32);
+
+    assert_eq_vec3!(
+        camera.screen_unit_x,
+        Vec3::new(0.5f32.sqrt(), -(0.5f32.sqrt()), 0.0)
+    );
+
+    assert_eq_vec3!(
+        camera.screen_unit_x,
+        Vec3::new(0.5f32.sqrt(), -(0.5f32.sqrt()), 0.0)
+    );
+
+    assert_eq_vec3!(
+        camera.screen_unit_y,
+        Vec3::new(0.5f32, 0.5f32, -(0.5f32.sqrt()))
+    )
+}
+
+#[test]
+fn gen_ray() {
+
 }
