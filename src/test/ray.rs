@@ -4,7 +4,7 @@ use glam::Vec3;
 use crate::{ray::{Optics, RayColor}, material::color::Color};
 
 #[test]
-fn test_reflect_color() {
+fn reflect_color() {
     let ray_color_r = RayColor::R(40.0);
     let ray_color_g = RayColor::G(40.0);
     let ray_color_b = RayColor::B(40.0);
@@ -17,7 +17,7 @@ fn test_reflect_color() {
 }
 
 #[test]
-fn test_reflect_direction() {
+fn reflect_direction() {
     let normal = Vec3::Z;
     let ray_direction = Vec3::new(1.0, 1.0, 2.0);
 
