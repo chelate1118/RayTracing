@@ -6,11 +6,11 @@ use super::Material;
 #[derive(Clone, Copy)]
 pub(crate) struct Normal {
     rough: Gaussian<f32>,
-    color: Color
+    color: Color<f32>
 }
 
 impl Normal {
-    pub(crate) fn new(color: Color, rough: f32) -> Self {
+    pub(crate) fn new(color: Color<f32>, rough: f32) -> Self {
         if color.r > 255.0 || color.g > 255.0 || color.b > 255.0 {
             panic!("Normal surface color value must be less than 255.0.");
         }

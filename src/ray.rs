@@ -36,11 +36,19 @@ impl RayColor {
     pub(crate) const GREEN: RayColor = RayColor::G(1.0);
     pub(crate) const BLUE: RayColor = RayColor::B(1.0);
 
-    pub(crate) fn mix_color(&self, surface_color: Color) -> RayColor {
+    pub(crate) fn mix_color(&self, surface_color: Color<f32>) -> RayColor {
         match self {
             RayColor::R(r) => RayColor::R(r * surface_color.r),
             RayColor::G(g) => RayColor::G(g * surface_color.g),
             RayColor::B(b) => RayColor::B(b * surface_color.b)
+        }
+    }
+
+    pub(crate) fn get_value(&self) -> f32 {
+        match self {
+            RayColor::R(r) => *r,
+            RayColor::G(g) => *g,
+            RayColor::B(b) => *b
         }
     }
 }
