@@ -2,7 +2,7 @@ use glam::Vec3;
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
 
-use crate::{map::world::World, ray::{RayColor, Ray}, loader::FromValue};
+use crate::{map::world::World, ray::{RayColor, Ray}, loader::FromValue, HyperParameter};
 
 pub(crate) struct Camera {
     pub(crate) position: Vec3,
@@ -21,6 +21,13 @@ impl FromValue for Camera {
         let pi = ci.pi.to_radians();
         let theta = ci.theta.to_radians();
 
+        if ci.width > HyperParameter::MAX_WIDTH || ci.height > HyperParameter::MAX_HEIGHT {
+            panic!("Size is too big. Make sure screen width is smaller than {}, and height is smaller than {}.",
+                HyperParameter::MAX_WIDTH,
+                HyperParameter::MAX_HEIGHT
+            );
+        }
+
         Ok(Camera {
             position: Vec3::new(ci.x, ci.y, ci.z),
             direction: Self::get_direction(ci),
@@ -36,7 +43,7 @@ impl FromValue for Camera {
 impl Camera {
     pub(crate) fn start_ray(
         &self,
-        world: World,
+        world: &World,
         x: usize,
         y: usize,
         ray_color: RayColor
