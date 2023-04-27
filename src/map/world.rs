@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
 
-use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::{self, LightSphere}}, plane::Plane}, ray::Ray, loader::FromValue};
+use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::{LightSphere}}, plane::Plane}, ray::Ray, loader::FromValue};
 
 pub(crate) struct World {
     pub(crate) objects: Vec<Box<dyn Object>>
