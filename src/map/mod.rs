@@ -26,8 +26,9 @@ impl FromValue for Map {
 
 impl Map {
     pub(crate) fn render_one_step(&self, screen: &mut[Vec<Color<i32>>]) {
-        for (x, color_col) in screen.iter_mut().enumerate().take(self.camera.width) {
-            for (y, color) in color_col.iter_mut().enumerate().take(self.camera.height) {
+        for (x, color_col) in screen.iter_mut().enumerate() {
+            for (y, color) in color_col.iter_mut().enumerate() {
+                // println!("({}, {})...", x, y);
                 *color += Color {
                     r: self.camera.start_ray(&self.world, x, y, RayColor::RED).get_value() as i32,
                     g: self.camera.start_ray(&self.world, x, y, RayColor::GREEN).get_value() as i32,
@@ -44,6 +45,10 @@ impl Map {
                 }
             }
         }*/
+    }
+
+    pub(crate) fn get_screen_size(&self) -> (usize, usize) {
+        (self.camera.width, self.camera.height)
     }
 }
 

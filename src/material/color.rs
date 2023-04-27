@@ -46,10 +46,10 @@ impl<T> Mul<f32> for Color<T> where T: Mul<f32, Output = T> {
     }
 }
 
-impl<T> Div<f32> for Color<T> where T: Div<f32, Output = T> {
+impl<T, D> Div<D> for Color<T> where T: Div<D, Output = T>, D: Copy {
     type Output = Self;
 
-    fn div(self, rhs: f32) -> Self {
+    fn div(self, rhs: D) -> Self {
         Color {
             r: self.r / rhs,
             g: self.g / rhs,
