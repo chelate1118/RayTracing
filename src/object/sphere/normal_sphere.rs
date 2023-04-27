@@ -35,11 +35,11 @@ impl Object for NormalSphere {
         self.sphere.reach_point(ray)
     }
 
-    fn reach_normal(&self, ray: Ray) -> Vec3 {
-        self.sphere.reach_normal(ray)
+    fn reach_normal(&self, point: Vec3) -> Vec3 {
+        self.sphere.reach_normal(point)
     }
 
-    fn get_material(&self) -> Box<dyn Material> {
+    fn get_material(&self, _: Vec3) -> Box<dyn Material> {
         Box::new(self.material)
     }    
 }

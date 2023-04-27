@@ -35,6 +35,6 @@ fn reach_normal() {
         5.0
     );
 
-    assert_eq!(Vec3::new(-0.6, -0.8, 0.0), sphere.reach_normal(ray));
-    assert_eq!(Vec3::new(-0.8, -0.6, 0.0), sphere.reach_normal(ray2));
+    assert_eq!(Vec3::new(-0.6, -0.8, 0.0), sphere.reach_normal(sphere.reach_point(ray).unwrap()));
+    assert_eq!(Vec3::new(-0.8, -0.6, 0.0), sphere.reach_normal(sphere.reach_point(ray2).unwrap()));
 }

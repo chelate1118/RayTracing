@@ -44,9 +44,7 @@ impl Sphere {
         Some(ray.source + reach_vector)
     }
 
-    pub(crate) fn reach_normal(&self, ray: Ray) -> Vec3 {
-        let reach_point = self.reach_point(ray).unwrap();
-
-        (reach_point - self.center).normalize()
+    pub(crate) fn reach_normal(&self, point: Vec3) -> Vec3 {
+        (point - self.center).normalize()
     }
 }

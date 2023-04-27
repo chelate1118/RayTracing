@@ -48,11 +48,11 @@ impl Object for Plane {
         Some(ray.source + source_to_intersection)
     }
 
-    fn reach_normal(&self, ray: Ray) -> Vec3 {
+    fn reach_normal(&self, _: Vec3) -> Vec3 {
         self.normal
     }
 
-    fn get_material(&self) -> Box<dyn Material> {
+    fn get_material(&self, _: Vec3) -> Box<dyn Material> {
         Box::new(self.material)
     }
 }
