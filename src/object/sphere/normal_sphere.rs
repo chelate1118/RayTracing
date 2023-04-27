@@ -17,11 +17,11 @@ impl FromValue for NormalSphere {
 
         Ok(NormalSphere {
             sphere: Sphere::new(
-                Vec3::new(nsi.x, nsi.y, nsi.z),
+                Vec3::from_array(nsi.center),
                 nsi.radius
             ),
             material: Normal::new(
-                Color::new(nsi.r, nsi.g, nsi.b),
+                Color::from_array(nsi.color),
                 nsi.rough
             )
         })
@@ -44,12 +44,8 @@ impl Object for NormalSphere {
 
 #[derive(Serialize, Deserialize)]
 struct NormalSphereInfo {
-    x: f32,
-    y: f32,
-    z: f32,
+    center: [f32; 3],
     radius: f32,
-    r: f32,
-    g: f32,
-    b: f32,
+    color: [f32; 3],
     rough: f32
 }

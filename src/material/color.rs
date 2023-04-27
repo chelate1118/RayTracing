@@ -15,6 +15,15 @@ impl<T> Color<T> {
     pub(crate) fn new(r: T, g: T, b: T) -> Self {
         Color { r, g, b }
     }
+
+    pub(crate) fn from_array(x: [T; 3]) -> Self
+        where T: Copy {
+        Color {
+            r: x[0],
+            g: x[1],
+            b: x[2]
+        }
+    }
 }
 
 impl<T1, T2> AddAssign<Color<T1>> for Color<T2> where T2: AddAssign<T1> {

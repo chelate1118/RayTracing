@@ -19,15 +19,9 @@ fn reach_point() {
     let plane = Plane::from_value(
         str_to_value(r#"
             {
-                "px": 1,
-                "py": 0,
-                "pz": 0,
-                "nx": -1,
-                "ny": 0,
-                "nz": 1,
-                "r": 255,
-                "g": 255,
-                "b": 255,
+                "point": [1, 0, 0],
+                "normal": [-1, 0, 1],
+                "color": [255, 255, 255],
                 "rough": 3
             }
         "#).unwrap()

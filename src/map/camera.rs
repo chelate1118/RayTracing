@@ -29,7 +29,7 @@ impl FromValue for Camera {
         }
 
         Ok(Camera {
-            position: Vec3::new(ci.x, ci.y, ci.z),
+            position: Vec3::from_array(ci.position),
             direction: Self::get_direction(ci),
             width: ci.width,
             height: ci.height,
@@ -96,9 +96,7 @@ impl Camera {
 
 #[derive(Serialize, Deserialize, Clone, Copy)]
 struct CameraInfo {
-    x: f32,
-    y: f32,
-    z: f32,
+    position: [f32; 3],
     pi: f32,
     theta: f32,
     width: usize,

@@ -19,10 +19,10 @@ impl FromValue for Plane {
         let pi: PlaneInfo = serde_json::from_value(value)?;
 
         Ok(Plane {
-            point: Vec3::new(pi.px, pi.py, pi.pz),
-            normal: Vec3::new(pi.nx, pi.ny, pi.nz).normalize(),
+            point: Vec3::from_array(pi.point),
+            normal: Vec3::from_array(pi.normal).normalize(),
             material: Normal::new(
-                Color::new(pi.r, pi.g, pi.b),
+                Color::from_array(pi.color),
                 pi.rough
             )
         })
@@ -59,14 +59,8 @@ impl Object for Plane {
 
 #[derive(Serialize, Deserialize)]
 struct PlaneInfo {
-    px: f32,
-    py: f32,
-    pz: f32,
-    nx: f32,
-    ny: f32,
-    nz: f32,
-    r: f32,
-    g: f32,
-    b: f32,
+    point: [f32; 3],
+    normal: [f32; 3],
+    color: [f32; 3],
     rough: f32
 }

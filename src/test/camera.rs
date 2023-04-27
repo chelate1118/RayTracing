@@ -7,9 +7,7 @@ fn load_camera() {
 
     let camera = Camera::from_value(
         loader::str_to_value(r#"{
-            "x": 10.0,
-            "y": 5.0,
-            "z": 3.0,
+            "position": [10.0, 5.0, 3.0],
             "pi": 45.0,
             "theta": 45.0,
             "width": 1200,

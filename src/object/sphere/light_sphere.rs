@@ -19,11 +19,11 @@ impl FromValue for LightSphere {
 
         Ok(LightSphere {
             sphere: Sphere::new(
-                Vec3::new(lsi.x, lsi.y, lsi.z),
+                Vec3::from_array(lsi.center),
                 lsi.radius
             ),
             material: LightSource::new(
-                Color::new(lsi.r, lsi.g, lsi.b)
+                Color::from_array(lsi.color)
             ),
             noise: Perlin::new(1),
             gloom: lsi.gloom
@@ -55,12 +55,8 @@ impl Object for LightSphere {
 
 #[derive(Serialize, Deserialize)]
 struct LightSphereInfo {
-    x: f32,
-    y: f32,
-    z: f32,
+    center: [f32; 3],
     radius: f32,
-    r: f32,
-    g: f32,
-    b: f32,
+    color: [f32; 3],
     gloom: f32
 }
