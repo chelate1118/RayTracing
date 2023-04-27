@@ -15,11 +15,7 @@ impl Normal {
             panic!("Normal surface color value must be less than 255.0.");
         }
 
-        let color = Color {
-            r: color.r / 255.0,
-            g: color.g / 255.0,
-            b: color.b / 255.0
-        };
+        let color = color / 255.0;
 
         Normal {
             rough: Gaussian::new(0.0, rough).unwrap(),
