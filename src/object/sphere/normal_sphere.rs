@@ -45,7 +45,7 @@ impl Object for NormalSphere {
 }
 
 #[derive(Serialize, Deserialize)]
-pub(crate) struct NormalSphereInfo {
+struct NormalSphereInfo {
     x: f32,
     y: f32,
     z: f32,

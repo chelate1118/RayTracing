@@ -12,6 +12,10 @@ impl FromValue for World {
         let wi: WorldInfo = serde_json::from_value(value)?;
         let mut objects: Vec<Box<dyn Object>> = Vec::new();
 
+        for plane in wi.plane.iter() {
+            todo!()
+        }
+
         for sphere in wi.normal_sphere.iter() {
             objects.push(Box::new(NormalSphere::from_value(sphere.to_owned())?))
         }
@@ -51,7 +55,7 @@ impl World {
 }
 
 #[derive(Serialize, Deserialize)]
-pub(crate) struct WorldInfo {
+struct WorldInfo {
     plane: Vec<Value>,
     normal_sphere: Vec<Value>
 }

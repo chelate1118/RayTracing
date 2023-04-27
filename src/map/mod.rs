@@ -48,7 +48,7 @@ impl Map {
 }
 
 #[derive(Serialize, Deserialize)]
-pub(crate) struct MapInfo {
+struct MapInfo {
     camera: Value,
     object: Value
 }
