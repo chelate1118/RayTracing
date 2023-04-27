@@ -1,6 +1,7 @@
 mod ray;
 mod sphere;
 mod camera;
+mod plane;
 
 #[allow(unused_macros)]
 macro_rules! assert_eq_vec3 {
