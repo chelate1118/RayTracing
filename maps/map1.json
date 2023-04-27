@@ -2,10 +2,10 @@
     "camera": {
         "position": [-100, 0, 100],
         "pi": 0.0,
-        "theta:": 135.0,
-        "width": 1200,
-        "height": 800,
-        "distance": 400.0
+        "theta": 135.0,
+        "width": 300,
+        "height": 200,
+        "distance": 100.0
     },
     "object": {
         "plane": [
