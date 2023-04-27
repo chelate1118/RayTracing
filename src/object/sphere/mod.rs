@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 
 pub(crate) mod normal_sphere;
+pub(crate) mod light_sphere;
 
 use glam::Vec3;
 use crate::ray::Ray;
