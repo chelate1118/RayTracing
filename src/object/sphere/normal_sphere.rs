@@ -30,15 +30,6 @@ impl FromValue for NormalSphere {
     }
 }
 
-impl NormalSphere {
-    pub(crate) fn new(center: Vec3, radius: f32, color: Color, rough: f32) -> Self {
-        NormalSphere {
-            sphere: Sphere::new(center, radius),
-            material: Normal::new(color, rough)
-        }
-    }
-}
-
 impl Object for NormalSphere {
     fn reach_point(&self, ray: Ray) -> Option<Vec3> {
         self.sphere.reach_point(ray)
