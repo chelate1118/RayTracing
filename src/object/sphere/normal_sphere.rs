@@ -6,8 +6,6 @@ use crate::{material::{normal::Normal, color::Color, Material}, object::Object, 
 
 use super::Sphere;
 
-
-#[derive(Clone, Copy)]
 pub(crate) struct NormalSphere {
     sphere: Sphere,
     material: Normal
