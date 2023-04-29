@@ -1,7 +1,8 @@
 #![allow(unused_imports)]
 
 use glam::Vec3;
-use crate::{ray::{Optics, RayColor}, material::color::Color};
+use crate::{ray::{Optics, RayColor, Ray}, material::color::Color};
+
 
 #[test]
 fn reflect_color() {
@@ -22,4 +23,14 @@ fn reflect_direction() {
     let ray_direction = Vec3::new(1.0, 1.0, 2.0);
 
     assert_eq!(ray_direction.reflect_from(normal), Vec3::new(-1.0, -1.0, 2.0));
+}
+
+#[test]
+fn reflect_from() {
+    use super::assert_eq_vec3;
+
+    let normal = Vec3::Z;
+    let dist = Vec3::X;
+
+    assert_eq_vec3!(dist.reflect_from(normal), Vec3::X);
 }
