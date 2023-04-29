@@ -5,7 +5,7 @@ use rand_distr::{Normal as Gaussian, Distribution};
 use crate::material::color::Color;
 use std::f32::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub(crate) struct Ray {
     pub(crate) source: Vec3,
     pub(crate) direction: Vec3,
@@ -60,7 +60,7 @@ pub(crate) trait Optics {
 
 impl Optics for Vec3 {
     fn reflect_from(self, normal: Vec3) -> Self {
-        self - self.reject_from(normal) * 2.0
+        self.reject_from(normal) * 2.0 - self
     }
 
     fn dispersion(self, rough: Gaussian<f32>) -> Self {
@@ -70,8 +70,8 @@ impl Optics for Vec3 {
         let r_disp = rough.sample(&mut rand::thread_rng());
         let angle = rand::random::<f32>() * TWO_PI;
 
-        let x_coor = r_disp * angle.sin() * self.abs();
-        let y_coor = r_disp * angle.cos() * self.abs();
+        let x_coor = r_disp * angle.sin() * self.length();
+        let y_coor = r_disp * angle.cos() * self.length();
 
         self + x_coor * unit_x + y_coor * unit_y
     }
