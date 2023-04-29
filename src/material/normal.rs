@@ -31,9 +31,9 @@ impl Material for Normal {
         let color = ray.color.mix_color(self.color);
         let light_source = ray.reached_light;
         let reflect_count = ray.reflect_count + 1;
-        
+
         direction = direction.dispersion(self.rough);
-        while is_valid_reflect(ray.direction, direction, normal) {
+        while is_invalid_reflect(ray.direction, direction, normal) {
             direction = direction.dispersion(self.rough);
         }
 
@@ -47,6 +47,6 @@ impl Material for Normal {
     }
 }
 
-fn is_valid_reflect(before: Vec3, after: Vec3, normal: Vec3) -> bool {
-    before.dot(normal) * after.dot(normal) < 0.0
+fn is_invalid_reflect(before: Vec3, after: Vec3, normal: Vec3) -> bool {
+    before.dot(normal) * after.dot(normal) > 0.0
 }
