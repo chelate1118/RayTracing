@@ -1,4 +1,5 @@
 use glam::Vec3;
+use rand::Rng;
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
 
@@ -50,8 +51,10 @@ impl Camera {
         y: usize,
         ray_color: RayColor
     ) -> Ray {
-        let x_pix_dist = (x as i32 - (self.width/2) as i32) as f32 + 0.5;
-        let y_pix_dist = (y as i32 - (self.height/2) as i32) as f32 + 0.5;
+        let mut rng = rand::thread_rng();
+
+        let x_pix_dist = (x as i32 - (self.width/2) as i32) as f32 + rng.gen::<f32>();
+        let y_pix_dist = (y as i32 - (self.height/2) as i32) as f32 + rng.gen::<f32>();
 
         let x_dist = x_pix_dist / self.distance * self.screen_unit_x;
         let y_dist = y_pix_dist / self.distance * self.screen_unit_y;
