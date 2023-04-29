@@ -42,10 +42,6 @@ impl Object for Plane {
 
         let reach_distance = source_to_plane.length()/cos;
 
-        if reach_distance > 2e3 {
-            return None;
-        }
-
         let source_to_intersection = reach_distance * normalized_dir;
 
         Some(ray.source + source_to_intersection)

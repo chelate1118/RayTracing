@@ -32,10 +32,19 @@ impl FromValue for LightSphere {
 }
 
 impl LightSphere {
-    fn get_bright(&self, point: Vec3) -> f32 {
-        let noise_value = self.noise.get(point.as_dvec3().to_array()) as f32;
+    const PERLIN_SCALE: f64 = 0.2;
+    const DARK_RATIO: f64 = 0.4;
 
-        1.0 - self.gloom * noise_value
+    fn get_bright(&self, point: Vec3) -> f32 {
+        let noise_value = (self.noise.get(
+            (point.as_dvec3() * Self::PERLIN_SCALE).to_array()
+        ) + 1.0) / 2.0;
+
+        if noise_value < Self::DARK_RATIO {
+            1.0 - self.gloom
+        } else {
+            1.0
+        }
     }
 }
 
