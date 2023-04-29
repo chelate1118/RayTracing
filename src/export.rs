@@ -10,7 +10,7 @@ pub(super) fn screen_to_png(
     file_name: &str
 ) {
     let img: RgbImage = ImageBuffer::from_fn(width as u32, height as u32, |x, y| {
-        color_to_rgb(screen[x as usize][y as usize], scale)
+        color_to_rgb(screen[y as usize][x as usize], scale)
     });
 
     img.save(file_name).unwrap();
