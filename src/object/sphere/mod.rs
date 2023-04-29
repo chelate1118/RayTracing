@@ -32,12 +32,8 @@ impl Sphere {
         let dot_product: f32 = Vec3::dot(source_to_center, normalized_dir);
         let reach_distance: f32 = dot_product - (self.radius.powi(2) - light_dist.powi(2)).sqrt();
 
-        if dot_product < 0.0 {
+        if dot_product < 0.0 || reach_distance <= 0.0 {
             return None;
-        }
-
-        if reach_distance < 0.0 {
-            panic!("Ray can't start from inside of the sphere.");
         }
 
         let reach_vector: Vec3 = normalized_dir * reach_distance;

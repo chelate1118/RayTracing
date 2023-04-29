@@ -34,15 +34,18 @@ impl Object for Plane {
         let source_to_point: Vec3 = self.point - ray.source;
         let normalized_dir = ray.direction.normalize();
 
-        let source_to_plane = source_to_point.project_onto_normalized(self.normal);
-        
+        let source_to_plane = source_to_point.project_onto(self.normal);
         let cos = source_to_plane.normalize().dot(normalized_dir);
-
-        if cos < 0.0 {
+        if cos <= 0.0 {
             return None;
         }
 
         let reach_distance = source_to_plane.length()/cos;
+
+        if reach_distance > 2e3 {
+            return None;
+        }
+
         let source_to_intersection = reach_distance * normalized_dir;
 
         Some(ray.source + source_to_intersection)
