@@ -9,8 +9,8 @@ use camera::Camera;
 use crate::{loader::FromValue, material::color::Color, ray::RayColor};
 
 pub(crate) struct Map {
-    camera: Camera,
-    world: World
+    pub(crate) camera: Camera,
+    pub(crate) world: World
 }
 
 impl FromValue for Map {
@@ -28,7 +28,6 @@ impl Map {
     pub(crate) fn render_one_step(&self, screen: &mut[Vec<Color<i32>>]) {
         for (x, color_col) in screen.iter_mut().enumerate() {
             for (y, color) in color_col.iter_mut().enumerate() {
-                // println!("({}, {})...", x, y);
                 *color += Color {
                     r: self.camera.start_ray(&self.world, x, y, RayColor::RED).get_value() as i32,
                     g: self.camera.start_ray(&self.world, x, y, RayColor::GREEN).get_value() as i32,
@@ -36,15 +35,6 @@ impl Map {
                 }
             }
         }
-        /*for x in 0..self.camera.width {
-            for y in 0..self.camera.height {
-                screen[x][y] += Color {
-                    r: self.camera.start_ray(&self.world, x, y, RayColor::RED).get_value() as i32,
-                    g: self.camera.start_ray(&self.world, x, y, RayColor::GREEN).get_value() as i32,
-                    b: self.camera.start_ray(&self.world, x, y, RayColor::BLUE).get_value() as i32,
-                }
-            }
-        }*/
     }
 
     pub(crate) fn get_screen_size(&self) -> (usize, usize) {
