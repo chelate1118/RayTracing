@@ -42,8 +42,7 @@ fn main() {
 
     for frame in 0..HyperParameter::RENDER_COUNT {
         if (frame+1) % HyperParameter::EXPORT_FRAME == 0 {
-            let cnt = frame / HyperParameter::EXPORT_FRAME;
-            let file_name = format!("render/{}/render_{}.png", HyperParameter::FILE_NAME,cnt);
+            let file_name = format!("render/{}/render_{}.png", HyperParameter::FILE_NAME, frame+1);
 
             export::screen_to_png(&screen, width, height, frame as i32, &file_name);
         }
