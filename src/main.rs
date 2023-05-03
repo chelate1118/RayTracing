@@ -47,7 +47,7 @@ fn main() {
             export::screen_to_png(&screen, width, height, frame as i32, &file_name);
         }
 
-        println!("process {}...", frame);
+        println!("process {}...", frame+1);
         map.render_one_step(&mut screen);
     }
 }
