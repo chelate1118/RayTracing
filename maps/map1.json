@@ -8,9 +8,14 @@
 		"distance": 2000.0
 	},
 	"object": {
+		"sun": {
+			"direction": [0, -1, -1],
+			"color": [255, 255, 255],
+			"dispertion": 0.5
+		},
 		"plane": [
 			{
-				"point": [0, 0, -25],
+				"point": [0, 0, -20],
 				"normal": [0, 0, 1],
 				"color": [127, 127, 127],
 				"rough": 1
@@ -20,8 +25,8 @@
 			{
 				"center": [25, 0, 0],
 				"radius": 20,
-				"color": [180, 180, 100],
-				"rough": 2
+				"color": [255, 255, 255],
+				"rough": 0.3
 			}
 		],
 		"light_sphere": [
