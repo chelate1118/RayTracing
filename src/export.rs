@@ -17,6 +17,6 @@ pub(super) fn screen_to_png(
 }
 
 fn color_to_rgb(color: Color<i32>, scale: i32) -> image::Rgb<u8> {
-    let color = color / scale;
+    let color = (color / scale).limit();
     image::Rgb([color.r as u8, color.g as u8, color.b as u8])
 }

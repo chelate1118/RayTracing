@@ -1,6 +1,4 @@
-#![allow(dead_code)]
-
-use std::ops::{Div, Mul, AddAssign};
+use std::{ops::{Div, Mul, AddAssign}, cmp::min};
 
 use serde::{Serialize, Deserialize};
 
@@ -9,6 +7,16 @@ pub(crate) struct Color<T> {
     pub(crate) r: T,
     pub(crate) g: T,
     pub(crate) b: T
+}
+
+impl Color<i32> {
+    pub(crate) fn limit(&self) -> Self {
+        Color {
+            r: min(self.r, 255),
+            g: min(self.g, 255),
+            b: min(self.b, 255)
+        }
+    }
 }
 
 impl<T> Color<T> {
