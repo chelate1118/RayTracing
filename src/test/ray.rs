@@ -22,7 +22,7 @@ fn reflect_direction() {
     let normal = Vec3::Z;
     let ray_direction = Vec3::new(1.0, 1.0, 2.0);
 
-    assert_eq!(ray_direction.reflect_from(normal), Vec3::new(-1.0, -1.0, 2.0));
+    assert_eq!(ray_direction.reflect_from(normal), Vec3::new(1.0, 1.0, -2.0));
 }
 
 #[test]
