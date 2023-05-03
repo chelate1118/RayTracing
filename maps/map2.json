@@ -3,9 +3,9 @@
 		"position": [-1000, 0, 1000],
 		"pi": 0.0,
 		"theta": 135.0,
-		"width": 1000,
-		"height": 750,
-		"distance": 7500.0
+		"width": 2100,
+		"height": 1600,
+		"distance": 15000.0
     },
 	"object": {
 		"sun": {
