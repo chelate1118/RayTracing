@@ -18,6 +18,7 @@ impl HyperParameter {
     const REFLECTION_COUNT: u32 = 12;
     const RENDER_COUNT: usize = 1024;
     const EXPORT_FRAME: usize = 8;
+    const BRIGHT: f32 = 2.0;
     const FILE_NAME: &str = "map2";
 }
 

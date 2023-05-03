@@ -2,7 +2,7 @@
 
 use glam::Vec3;
 use rand_distr::{Normal as Gaussian, Distribution};
-use crate::material::color::Color;
+use crate::{material::color::Color, HyperParameter};
 use std::f32::*;
 
 #[derive(Clone, Copy, Debug)]
@@ -45,7 +45,7 @@ impl RayColor {
     }
 
     pub(crate) fn get_value(&self) -> f32 {
-        match self {
+        HyperParameter::BRIGHT * match self {
             RayColor::R(r) => *r,
             RayColor::G(g) => *g,
             RayColor::B(b) => *b
