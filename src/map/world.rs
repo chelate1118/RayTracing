@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
 
-use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::{LightSphere}}, plane::Plane}, ray::Ray, loader::FromValue};
+use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::{LightSphere}}, plane::Plane, sun::Sun}, ray::Ray, loader::FromValue};
 
 pub(crate) struct World {
     pub(crate) objects: Vec<Box<dyn Object>>
@@ -11,6 +11,8 @@ impl FromValue for World {
     fn from_value(value: Value) -> serde_json::Result<Self> {
         let wi: WorldInfo = serde_json::from_value(value)?;
         let mut objects: Vec<Box<dyn Object>> = Vec::new();
+
+        objects.push(Box::new(Sun::from_value(wi.sun)?));
 
         for plane in wi.plane.iter() {
             objects.push(Box::new(Plane::from_value(plane.to_owned())?))
@@ -47,7 +49,7 @@ impl World {
         let mut min_distance = std::f32::MAX;
         for object in self.objects.iter() {
             if let Some(distance) = object.reach_distance(ray) {
-                if min_distance > distance {
+                if min_distance >= distance {
                     min_distance = distance;
                     reach_object = Some(object);
                 }
@@ -60,7 +62,8 @@ impl World {
 
 #[derive(Serialize, Deserialize)]
 struct WorldInfo {
+    sun: Value,
     plane: Vec<Value>,
     normal_sphere: Vec<Value>,
-    light_sphere: Vec<Value>
+    light_sphere: Vec<Value>,
 }

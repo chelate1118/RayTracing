@@ -1,5 +1,6 @@
 pub(crate) mod sphere;
 pub(crate) mod plane;
+pub(crate) mod sun;
 
 use crate::{ray::Ray, material::Material};
 use glam::Vec3;
