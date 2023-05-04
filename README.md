@@ -11,6 +11,14 @@ Supported light sources:
 - Sun
 - Light Sphere
 
+## Run Command
+
+Make sure cargo is in path environment.
+
+```console
+$ cargo run --release -- [json file name]
+```
+
 ## Example
 
 ![map2](https://user-images.githubusercontent.com/94269897/236137125-bfa9beca-2a60-43c1-8563-2b9545736bd9.png)
