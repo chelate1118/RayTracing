@@ -10,7 +10,7 @@ fn reflect_color() {
     let ray_color_g = RayColor::G(40.0);
     let ray_color_b = RayColor::B(40.0);
 
-    let surface_color = Color::new(0.25, 0.5, 1.0);
+    let surface_color = Color { r: 0.25, g: 0.5, b: 1.0 };
 
     assert_eq!(ray_color_r.mix_color(surface_color), RayColor::R(10.0));
     assert_eq!(ray_color_g.mix_color(surface_color), RayColor::G(20.0));

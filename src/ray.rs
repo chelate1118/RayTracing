@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-
 use glam::Vec3;
 use rand_distr::{Normal as Gaussian, Distribution};
 use crate::material::color::Color;

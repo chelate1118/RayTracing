@@ -20,10 +20,6 @@ impl Color<i32> {
 }
 
 impl<T> Color<T> {
-    pub(crate) fn new(r: T, g: T, b: T) -> Self {
-        Color { r, g, b }
-    }
-
     pub(crate) fn from_array(x: [T; 3]) -> Self
         where T: Copy {
         Color {

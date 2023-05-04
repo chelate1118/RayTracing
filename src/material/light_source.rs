@@ -29,7 +29,7 @@ impl LightSource {
 }
 
 impl Material for LightSource {
-    fn reflect(&self, ray: Ray, normal: Vec3, point: Vec3) -> Ray {
+    fn reflect(&self, ray: Ray, _: Vec3, point: Vec3) -> Ray {
         Ray {
             source: point,
             direction: ray.direction,

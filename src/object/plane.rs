@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-
 use glam::Vec3;
 use serde::Deserialize;
 use serde_json::Value;

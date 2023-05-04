@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-
 pub(crate) mod normal_sphere;
 pub(crate) mod light_sphere;
 

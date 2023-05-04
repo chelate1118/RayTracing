@@ -19,9 +19,6 @@ impl FromValue for Camera {
     fn from_value(value: Value) -> serde_json::Result<Self>{
         let ci: CameraInfo = serde_json::from_value(value)?;
 
-        let pi = ci.pi.to_radians();
-        let theta = ci.theta.to_radians();
-
         Ok(Camera {
             position: Vec3::from_array(ci.position),
             direction: Self::get_direction(ci),

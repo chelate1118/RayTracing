@@ -1,5 +1,3 @@
-#![allow(unused_variables)]
-
 mod object;
 mod ray;
 mod material;
@@ -9,7 +7,7 @@ mod export;
 mod math;
 mod test;
 
-use std::{fs, env};
+use std::{fs, env, io::Write};
 
 fn main() {
     let file_name = env::args().last().expect("File name not provided.");
@@ -20,6 +18,7 @@ fn main() {
 
     for frame in 1..map.config.render_count+1 {
         print!("process {}...", frame);
+        std::io::stdout().flush().unwrap();
         map.render_one_step(&mut screen);
 
         if frame % map.config.export_frame == 0 {

@@ -26,7 +26,7 @@ impl FromValue for Sun {
 }
 
 impl Object for Sun {
-    fn reach_point(&self, ray: crate::ray::Ray) -> Option<Vec3> {
+    fn reach_point(&self, _: crate::ray::Ray) -> Option<Vec3> {
         unreachable!()
     }
 
@@ -38,7 +38,7 @@ impl Object for Sun {
         Box::new(self.to_owned())
     }
 
-    fn reach_distance(&self, ray: crate::ray::Ray) -> Option<f32> {
+    fn reach_distance(&self, _: crate::ray::Ray) -> Option<f32> {
         Some(std::f32::MAX)
     }
 
