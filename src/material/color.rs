@@ -1,8 +1,8 @@
 use std::{ops::{Div, Mul, AddAssign}, cmp::min};
 
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 
-#[derive(Serialize, Deserialize, Clone, Copy, Default)]
+#[derive(Deserialize, Clone, Copy, Default)]
 pub(crate) struct Color<T> {
     pub(crate) r: T,
     pub(crate) g: T,

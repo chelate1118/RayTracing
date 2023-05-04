@@ -2,7 +2,7 @@ pub(crate) mod world;
 pub(crate) mod camera;
 pub(crate) mod config;
 
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 use serde_json::Value;
 use world::World;
 use camera::Camera;
@@ -64,7 +64,7 @@ impl Map {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize)]
 struct MapInfo {
     config: Value,
     camera: Value,

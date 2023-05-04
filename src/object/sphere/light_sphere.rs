@@ -1,6 +1,6 @@
 use glam::Vec3;
 use noise::{Perlin, NoiseFn};
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 
 use crate::{material::{light_source::LightSource, color::Color, Material}, loader::FromValue, object::Object, ray::Ray};
 
@@ -62,7 +62,7 @@ impl Object for LightSphere {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize)]
 struct LightSphereInfo {
     center: [f32; 3],
     radius: f32,

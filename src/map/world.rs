@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 use serde_json::Value;
 
 use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::LightSphere}, plane::Plane, sun::Sun}, ray::Ray, loader::FromValue};
@@ -68,7 +68,7 @@ impl World {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize)]
 struct WorldInfo {
     sun: Option<Value>,
     plane: Option<Vec<Value>>,

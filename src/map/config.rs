@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 
 use crate::loader::FromValue;
 
@@ -22,7 +22,7 @@ impl FromValue for Config {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize)]
 struct ConfigInfo {
     reflect: u32,
     render: usize,

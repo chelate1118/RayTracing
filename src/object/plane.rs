@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 
 use glam::Vec3;
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 use serde_json::Value;
 
 use crate::{material::{normal::Normal, color::Color, Material}, loader::FromValue, ray::Ray};
@@ -56,7 +56,7 @@ impl Object for Plane {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize)]
 struct PlaneInfo {
     point: [f32; 3],
     normal: [f32; 3],

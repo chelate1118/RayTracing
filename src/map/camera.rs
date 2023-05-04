@@ -1,6 +1,6 @@
 use glam::Vec3;
 use rand::Rng;
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 use serde_json::Value;
 
 use crate::{map::world::World, ray::{RayColor, Ray}, loader::FromValue};
@@ -91,7 +91,7 @@ impl Camera {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy)]
+#[derive(Deserialize, Clone, Copy)]
 struct CameraInfo {
     position: [f32; 3],
     pi: f32,

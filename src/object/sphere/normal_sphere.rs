@@ -1,5 +1,5 @@
 use glam::Vec3;
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 use serde_json::Value;
 
 use crate::{material::{normal::Normal, color::Color, Material}, object::Object, ray::Ray, loader::FromValue};
@@ -42,7 +42,7 @@ impl Object for NormalSphere {
     }    
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize)]
 struct NormalSphereInfo {
     center: [f32; 3],
     radius: f32,

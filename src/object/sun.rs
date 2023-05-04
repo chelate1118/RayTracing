@@ -1,5 +1,5 @@
 use glam::Vec3;
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 use serde_json::{Value, Result};
 
 use crate::{material::color::Color, loader::FromValue};
@@ -47,7 +47,7 @@ impl Object for Sun {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize)]
 struct SunInfo {
     direction: [f32; 3],
     color: [f32; 3],
