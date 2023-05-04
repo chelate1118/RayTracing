@@ -23,7 +23,7 @@ impl Sun {
         crate::math::normal_distribution(
             glam::Vec3::angle_between(-self.direction, direction),
             0.0,
-            self.dispertion
+            self.dispersion
         )
     }
 }

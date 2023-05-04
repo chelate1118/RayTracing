@@ -10,7 +10,7 @@ use super::Object;
 pub(crate) struct Sun {
     pub(crate) direction: Vec3,
     pub(crate) color: Color<f32>,
-    pub(crate) dispertion: f32
+    pub(crate) dispersion: f32
 }
 
 impl FromValue for Sun {
@@ -20,7 +20,7 @@ impl FromValue for Sun {
         Ok(Sun {
             direction: Vec3::from_array(si.direction).normalize(),
             color: Color::from_array(si.color),
-            dispertion: si.dispertion
+            dispersion: si.dispersion
         })
     }
 }
@@ -51,5 +51,5 @@ impl Object for Sun {
 struct SunInfo {
     direction: [f32; 3],
     color: [f32; 3],
-    dispertion: f32
+    dispersion: f32
 }
