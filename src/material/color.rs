@@ -10,7 +10,7 @@ pub(crate) struct Color<T> {
 }
 
 impl Color<f32> {
-    pub(crate) fn to_color_i32(&self, scale: f32) -> Color<i32> {
+    pub(crate) fn to_color_i32(self, scale: f32) -> Color<i32> {
         Color {
             r: (self.r * scale) as i32,
             g: (self.g * scale) as i32,
