@@ -1,7 +1,7 @@
 # Ray Tracing
 
 3D graphics project written by Rust, based on ray tracing.
-Load map from \*.json file, render objects.
+Load map from json file.
 
 Supported objects:
 - Plane (infinite)
