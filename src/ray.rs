@@ -1,4 +1,4 @@
-use glam::Vec3;
+use glam::{Vec3, Quat};
 use rand_distr::{Normal as Gaussian, Distribution};
 use crate::material::color::Color;
 use std::f32::*;
@@ -23,8 +23,10 @@ impl Ray {
 }
 
 pub(crate) trait Optics {
+    const TWO_PI: f32 = 2.0 * consts::PI;
     fn reflect_from(self, normal: Vec3) -> Self;
     fn dispersion(self, gaussian: Gaussian<f32>) -> Self;
+    fn random_orthonormal(self) -> Self;
 }
 
 impl Optics for Vec3 {
@@ -32,16 +34,18 @@ impl Optics for Vec3 {
         self.reject_from(normal) * 2.0 - self
     }
 
-    fn dispersion(self, rough: Gaussian<f32>) -> Self {
-        const TWO_PI: f32 = 2.0 * consts::PI;
+    fn dispersion(self, rough: Gaussian<f32>) -> Self {        
+        let rotate_axis = self.random_orthonormal();
+        let angle = rough.sample(&mut rand::thread_rng());
+        let quat = Quat::from_axis_angle(rotate_axis, angle);
+
+        quat.mul_vec3(self)
+    }
+
+    fn random_orthonormal(self) -> Self {
         let (unit_x, unit_y) = self.any_orthonormal_pair();
+        let angle = rand::random::<f32>() * Self::TWO_PI;
 
-        let r_disp = rough.sample(&mut rand::thread_rng());
-        let angle = rand::random::<f32>() * TWO_PI;
-
-        let x_coor = r_disp * angle.sin() * self.length();
-        let y_coor = r_disp * angle.cos() * self.length();
-
-        self + x_coor * unit_x + y_coor * unit_y
+        unit_x * angle.sin() + unit_y * angle.cos()
     }
 }

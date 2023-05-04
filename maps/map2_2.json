@@ -1,0 +1,87 @@
+{
+	"config": {
+		"reflect": 12,
+		"render": 16,
+		"export": 1,
+		"bright": 2.0
+	},
+    "camera": {
+		"position": [-1000, 0, 1000],
+		"pi": 0.0,
+		"theta": 135.0,
+		"width": 2100,
+		"height": 1600,
+		"distance": 15000.0
+    },
+	"object": {
+		"sun": {
+			"direction": [1, -1, -1.8],
+			"color": [255, 255, 255],
+			"dispersion": 1.2
+		},
+        "plane": [
+            {
+				"point": [0, 0, -20],
+				"normal": [0, 0, 1],
+				"color": [127, 127, 127],
+				"rough": 1
+            }
+        ],
+        "normal_sphere": [
+            {
+				"center": [0, 0, 0],
+				"radius": 20,
+				"color": [255, 150, 150],
+				"rough": 1.5
+			},
+            {
+				"center": [32, 32, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04
+			},
+            {
+				"center": [-32, 32, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04
+			},
+            {
+				"center": [32, -32, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04
+			},
+            {
+				"center": [-32, -32, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04
+			},
+            {
+				"center": [64, 0, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04
+			},
+            {
+				"center": [-64, 0, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04
+			},
+            {
+				"center": [0, 64, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04
+			},
+            {
+				"center": [0, -64, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04
+			}
+        ]
+    }
+}

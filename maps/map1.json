@@ -1,8 +1,8 @@
 {
 	"config": {
 		"reflect": 3,
-		"render": 128,
-		"export": 8,
+		"render": 512,
+		"export": 16,
 		"bright": 2.0
 	},
 	"camera": {
@@ -18,7 +18,7 @@
 			{
 				"point": [0, 0, -20],
 				"normal": [0, 0, 1],
-				"color": [255, 255, 255],
+				"color": [150, 255, 255],
 				"rough": 1
 			}
 		],
@@ -27,7 +27,7 @@
 				"center": [0, 0, 10],
 				"radius": 20,
 				"color": [255, 255, 255],
-				"rough": 1
+				"rough": 10
 			}
 		],
 		"light_sphere": [
