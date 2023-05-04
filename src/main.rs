@@ -11,36 +11,23 @@ mod test;
 
 use std::{fs, env};
 
-use loader::FromValue;
-
 fn main() {
     let file_name = env::args().last().expect("File name not provided.");
-
     fs::create_dir_all(format!("render/{file_name}")).expect("Fail to create directory.");
 
-    let map = map::Map::from_value(
-        loader::file_to_value(&format!("maps/{file_name}.json"))
-            .unwrap_or_else(|_| panic!("File {file_name} doesn't exist."))
-    ).expect("Fail to deserialize map informations.");
+    let map = loader::load_map(&file_name);
+    let mut screen = map.blank_screen();
 
-    let (width, height) = map.get_screen_size();
+    for frame in 1..map.config.render_count+1 {
+        print!("process {}...", frame);
+        map.render_one_step(&mut screen);
 
-    let mut screen = vec![
-        vec![
-            material::color::Color::<i32>::default();
-            width
-        ];
-        height
-    ];
+        if frame % map.config.export_frame == 0 {
+            let file_name = format!("render/{file_name}/render_{frame}.png");
 
-    for frame in 0..map.config.render_count {
-        if (frame+1) % map.config.export_frame == 0 {
-            let file_name = format!("render/{}/render_{}.png", map.config.file_name, frame+1);
-
-            export::screen_to_png(&screen, width, height, frame as i32, &file_name);
+            export::screen_to_png(&screen, frame as i32, &file_name);
         }
 
-        println!("process {}...", frame+1);
-        map.render_one_step(&mut screen);
+        println!("  done.");
     }
 }

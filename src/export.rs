@@ -4,12 +4,13 @@ use crate::material::color::Color;
 
 pub(super) fn screen_to_png(
     screen: &[Vec<Color<i32>>],
-    width: usize,
-    height: usize,
     scale: i32,
     file_name: &str
 ) {
-    let img: RgbImage = ImageBuffer::from_fn(width as u32, height as u32, |x, y| {
+    let width = screen[0].len() as u32;
+    let height = screen.len() as u32;
+
+    let img: RgbImage = ImageBuffer::from_fn(width, height, |x, y| {
         color_to_rgb(screen[y as usize][x as usize], scale)
     });
 

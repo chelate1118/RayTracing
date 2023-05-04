@@ -1,5 +1,3 @@
-use std::env;
-
 use serde::{Serialize, Deserialize};
 
 use crate::loader::FromValue;
@@ -8,8 +6,7 @@ pub(crate) struct Config {
     pub(crate) reflect_count: u32,
     pub(crate) render_count: usize,
     pub(crate) export_frame: usize,
-    pub(crate) bright: f32,
-    pub(crate) file_name: String
+    pub(crate) bright: f32
 }
 
 impl FromValue for Config {
@@ -20,8 +17,7 @@ impl FromValue for Config {
             reflect_count: ci.reflect,
             render_count: ci.render,
             export_frame: ci.export,
-            bright: ci.bright,
-            file_name: env::args().last().expect("File name not provided.z")
+            bright: ci.bright
         })
     }
 }

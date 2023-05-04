@@ -37,10 +37,6 @@ impl Map {
         }
     }
 
-    pub(crate) fn get_screen_size(&self) -> (usize, usize) {
-        (self.camera.width, self.camera.height)
-    }
-
     pub(crate) fn get_pixel_color(&self, x: usize, y: usize) -> Color<i32> {
         Color {
             r: self.camera.start_ray(
@@ -59,6 +55,12 @@ impl Map {
                 self.config.reflect_count
             ).get_value(self.config.bright) as i32,
         }
+    }
+
+    pub(crate) fn blank_screen(&self) -> Vec<Vec<Color<i32>>> {
+        let (width, height) = (self.camera.width, self.camera.height);
+
+        vec![ vec![Color::<i32>::default(); width]; height]
     }
 }
 
