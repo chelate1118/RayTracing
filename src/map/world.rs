@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
 
-use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::{LightSphere}}, plane::Plane, sun::Sun}, ray::Ray, loader::FromValue};
+use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::LightSphere}, plane::Plane, sun::Sun}, ray::Ray, loader::FromValue};
 
 pub(crate) struct World {
     pub(crate) objects: Vec<Box<dyn Object>>
@@ -12,18 +12,26 @@ impl FromValue for World {
         let wi: WorldInfo = serde_json::from_value(value)?;
         let mut objects: Vec<Box<dyn Object>> = Vec::new();
 
-        objects.push(Box::new(Sun::from_value(wi.sun)?));
-
-        for plane in wi.plane.iter() {
-            objects.push(Box::new(Plane::from_value(plane.to_owned())?))
+        if let Some(sun) = wi.sun {
+            objects.push(Box::new(Sun::from_value(sun)?));
         }
 
-        for normal_sphere in wi.normal_sphere.iter() {
-            objects.push(Box::new(NormalSphere::from_value(normal_sphere.to_owned())?))
+        if let Some(planes) = wi.plane {
+            for plane in planes.iter() {
+                objects.push(Box::new(Plane::from_value(plane.to_owned())?))
+            }
         }
 
-        for light_sphere in wi.light_sphere.iter() {
-            objects.push(Box::new(LightSphere::from_value(light_sphere.to_owned())?))
+        if let Some(normal_spheres) = wi.normal_sphere {
+            for normal_sphere in normal_spheres.iter() {
+                objects.push(Box::new(NormalSphere::from_value(normal_sphere.to_owned())?))
+            }
+        }
+
+        if let Some(light_spheres) = wi.light_sphere {
+            for light_sphere in light_spheres.iter() {
+                objects.push(Box::new(LightSphere::from_value(light_sphere.to_owned())?))
+            }
         }
 
         Ok(World { objects })
@@ -62,8 +70,8 @@ impl World {
 
 #[derive(Serialize, Deserialize)]
 struct WorldInfo {
-    sun: Value,
-    plane: Vec<Value>,
-    normal_sphere: Vec<Value>,
-    light_sphere: Vec<Value>,
+    sun: Option<Value>,
+    plane: Option<Vec<Value>>,
+    normal_sphere: Option<Vec<Value>>,
+    light_sphere: Option<Vec<Value>>,
 }
