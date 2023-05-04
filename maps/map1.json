@@ -14,43 +14,26 @@
 		"distance": 2000.0
 	},
 	"object": {
-		"sun": {
-			"direction": [0, -1, -1],
-			"color": [255, 255, 255],
-			"dispertion": 0.5
-		},
 		"plane": [
 			{
 				"point": [0, 0, -20],
 				"normal": [0, 0, 1],
-				"color": [127, 127, 127],
+				"color": [255, 255, 255],
 				"rough": 1
 			}
 		],
 		"normal_sphere": [
 			{
-				"center": [25, 0, 0],
+				"center": [0, 0, 10],
 				"radius": 20,
 				"color": [255, 255, 255],
-				"rough": 0.3
+				"rough": 1
 			}
 		],
 		"light_sphere": [
 			{
-				"center": [0, 50, 0],
-				"radius": 20,
-				"color": [196, 196, 255],
-				"gloom": 0.05
-			},
-			{
-				"center": [0, -50, 0],
-				"radius": 20,
-				"color": [196, 196, 255],
-				"gloom": 0.05
-			},
-			{
-				"center": [-25, 0, 0],
-				"radius": 20,
+				"center": [0, 1000, 1000],
+				"radius": 1000,
 				"color": [196, 196, 255],
 				"gloom": 0.05
 			}
