@@ -40,9 +40,10 @@ impl Camera {
         world: &World,
         x: usize,
         y: usize,
-        ray_color: RayColor
+        ray_color: RayColor,
+        reflect_count: u32
     ) -> RayColor {
-        world.start_ray(self.generate_ray(x, y, ray_color)).color
+        world.start_ray(self.generate_ray(x, y, ray_color), reflect_count).color
     }
 
     fn generate_ray(

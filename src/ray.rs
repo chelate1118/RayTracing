@@ -2,7 +2,7 @@
 
 use glam::Vec3;
 use rand_distr::{Normal as Gaussian, Distribution};
-use crate::{material::color::Color, HyperParameter};
+use crate::material::color::Color;
 use std::f32::*;
 
 #[derive(Clone, Copy, Debug)]
@@ -19,8 +19,8 @@ impl Ray {
         Ray { source, direction, color, reached_light: false, reflect_count: 0 }
     }
 
-    pub(crate) fn is_done(&self) -> bool {
-        self.reflect_count >= crate::HyperParameter::REFLECTION_COUNT || self.reached_light
+    pub(crate) fn is_done(&self, reflect_count: u32) -> bool {
+        self.reflect_count >= reflect_count || self.reached_light
     }
 }
 
@@ -44,8 +44,8 @@ impl RayColor {
         }
     }
 
-    pub(crate) fn get_value(&self) -> f32 {
-        HyperParameter::BRIGHT * match self {
+    pub(crate) fn get_value(&self, bright: f32) -> f32 {
+        bright * match self {
             RayColor::R(r) => *r,
             RayColor::G(g) => *g,
             RayColor::B(b) => *b

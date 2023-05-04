@@ -1,4 +1,10 @@
 {
+	"config": {
+		"reflect": 12,
+		"render": 1024,
+		"export": 8,
+		"bright": 2.0
+	},
     "camera": {
 		"position": [-1000, 0, 1000],
 		"pi": 0.0,

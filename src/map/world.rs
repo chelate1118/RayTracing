@@ -31,10 +31,10 @@ impl FromValue for World {
 }
 
 impl World {
-    pub(crate) fn start_ray(&self, ray: Ray) -> Ray {
+    pub(crate) fn start_ray(&self, ray: Ray, reflect_count: u32) -> Ray {
         let mut ray = ray;
 
-        while !ray.is_done() {
+        while !ray.is_done(reflect_count) {
             match self.reach_object(ray) {
                 Some(obj) => ray = obj.reflect(ray),
                 None => break

@@ -9,25 +9,18 @@ mod export;
 mod math;
 mod test;
 
-use std::fs;
+use std::{fs, env};
 
 use loader::FromValue;
 
-pub struct HyperParameter {}
-impl HyperParameter {
-    const REFLECTION_COUNT: u32 = 12;
-    const RENDER_COUNT: usize = 1024;
-    const EXPORT_FRAME: usize = 8;
-    const BRIGHT: f32 = 2.0;
-    const FILE_NAME: &str = "map2";
-}
-
 fn main() {
-    fs::create_dir_all(format!("render/{}", HyperParameter::FILE_NAME)).expect("Fail to create directory.");
+    let file_name = env::args().last().expect("File name not provided.");
+
+    fs::create_dir_all(format!("render/{file_name}")).expect("Fail to create directory.");
 
     let map = map::Map::from_value(
-        loader::file_to_value(&format!("maps/{}.json", HyperParameter::FILE_NAME))
-            .unwrap_or_else(|_| panic!("File {} doesn't exist.", HyperParameter::FILE_NAME))
+        loader::file_to_value(&format!("maps/{file_name}.json"))
+            .unwrap_or_else(|_| panic!("File {file_name} doesn't exist."))
     ).expect("Fail to deserialize map informations.");
 
     let (width, height) = map.get_screen_size();
@@ -40,9 +33,9 @@ fn main() {
         height
     ];
 
-    for frame in 0..HyperParameter::RENDER_COUNT {
-        if (frame+1) % HyperParameter::EXPORT_FRAME == 0 {
-            let file_name = format!("render/{}/render_{}.png", HyperParameter::FILE_NAME, frame+1);
+    for frame in 0..map.config.render_count {
+        if (frame+1) % map.config.export_frame == 0 {
+            let file_name = format!("render/{}/render_{}.png", map.config.file_name, frame+1);
 
             export::screen_to_png(&screen, width, height, frame as i32, &file_name);
         }
