@@ -33,7 +33,7 @@ impl Material for LightSource {
         Ray {
             source: point,
             direction: ray.direction,
-            color: ray.color.mix_color(self.color),
+            color: ray.color * self.color,
             reached_light: true,
             reflect_count: 0
         }

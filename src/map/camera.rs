@@ -3,7 +3,7 @@ use rand::Rng;
 use serde::Deserialize;
 use serde_json::Value;
 
-use crate::{map::world::World, ray::{RayColor, Ray}, loader::FromValue};
+use crate::{map::world::World, ray::Ray, loader::FromValue, material::color::Color};
 
 pub(crate) struct Camera {
     pub(crate) position: Vec3,
@@ -37,17 +37,15 @@ impl Camera {
         world: &World,
         x: usize,
         y: usize,
-        ray_color: RayColor,
         reflect_count: u32
-    ) -> RayColor {
-        world.start_ray(self.generate_ray(x, y, ray_color), reflect_count).color
+    ) -> Color<f32> {
+        world.start_ray(self.generate_ray(x, y), reflect_count).color
     }
 
     fn generate_ray(
         &self,
         x: usize,
-        y: usize,
-        ray_color: RayColor
+        y: usize
     ) -> Ray {
         let mut rng = rand::thread_rng();
 
@@ -59,7 +57,7 @@ impl Camera {
 
         let direction = self.direction + x_dist + y_dist;
 
-        Ray::new(self.position, direction, ray_color)
+        Ray::new(self.position, direction, Color::<f32>::default())
     }
 
     fn get_direction(ci: CameraInfo) -> Vec3 {

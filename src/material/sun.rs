@@ -7,7 +7,7 @@ impl Material for Sun {
         crate::ray::Ray {
             source: glam::Vec3::ZERO,
             direction: glam::Vec3::ZERO,
-            color: ray.color.mix_color(self.get_surface_color(ray.direction)),
+            color: ray.color * self.get_surface_color(ray.direction),
             reached_light: true,
             reflect_count: ray.reflect_count + 1
         }

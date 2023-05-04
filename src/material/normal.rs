@@ -28,7 +28,7 @@ impl Material for Normal {
     fn reflect(&self, ray: Ray, normal: Vec3, point: Vec3) -> Ray {
         let source = point;
         let mut direction = ray.direction.reflect_from(normal);
-        let color = ray.color.mix_color(self.color);
+        let color = ray.color * self.color;
         let light_source = ray.reached_light;
         let reflect_count = ray.reflect_count + 1;
 

@@ -1,20 +1,23 @@
 #![allow(unused_imports)]
 
 use glam::Vec3;
-use crate::{ray::{Optics, RayColor, Ray}, material::color::Color};
+use crate::{ray::{Optics, Ray}, material::color::Color};
 
 
 #[test]
 fn reflect_color() {
-    let ray_color_r = RayColor::R(40.0);
-    let ray_color_g = RayColor::G(40.0);
-    let ray_color_b = RayColor::B(40.0);
+    let ray_color = Color::<f32>::default();
 
-    let surface_color = Color { r: 0.25, g: 0.5, b: 1.0 };
+    let surface_color: Color<f32> = Color { r: 0.25, g: 0.5, b: 1.0 };
 
-    assert_eq!(ray_color_r.mix_color(surface_color), RayColor::R(10.0));
-    assert_eq!(ray_color_g.mix_color(surface_color), RayColor::G(20.0));
-    assert_eq!(ray_color_b.mix_color(surface_color), RayColor::B(40.0));
+    assert_eq!(
+        ray_color * surface_color,
+        Color {
+            r: 0.25f32,
+            g: 0.5f32,
+            b: 1.0f32
+        }
+    );
 }
 
 #[test]
