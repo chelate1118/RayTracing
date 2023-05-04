@@ -8,7 +8,7 @@ use world::World;
 use camera::Camera;
 use config::Config;
 
-use crate::{loader::FromValue, material::color::Color, ray::RayColor};
+use crate::{loader::FromValue, material::color::Color};
 
 pub(crate) struct Map {
     pub(crate) config: Config,
@@ -38,23 +38,11 @@ impl Map {
     }
 
     pub(crate) fn get_pixel_color(&self, x: usize, y: usize) -> Color<i32> {
-        Color {
-            r: self.camera.start_ray(
-                &self.world, x, y,
-                RayColor::RED,
-                self.config.reflect_count
-            ).get_value(self.config.bright) as i32,
-            g: self.camera.start_ray(
-                &self.world, x, y,
-                RayColor::GREEN,
-                self.config.reflect_count
-            ).get_value(self.config.bright) as i32,
-            b: self.camera.start_ray(
-                &self.world, x, y,
-                RayColor::BLUE,
-                self.config.reflect_count
-            ).get_value(self.config.bright) as i32,
-        }
+        self.camera.start_ray(
+            &self.world,
+            x, y,
+            self.config.reflect_count
+        ).to_color_i32(self.config.bright)
     }
 
     pub(crate) fn blank_screen(&self) -> Vec<Vec<Color<i32>>> {

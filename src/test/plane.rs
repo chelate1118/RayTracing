@@ -2,18 +2,18 @@
 
 use glam::Vec3;
 
-use crate::{ray::{Ray, RayColor}, object::{plane::Plane, Object}, loader::{FromValue, str_to_value}};
+use crate::{ray::Ray, object::{plane::Plane, Object}, loader::{FromValue, str_to_value}, material::color::Color};
 
 #[test]
 fn reach_point() {
     use super::assert_eq_vec3;
     
     let ray = Ray::new(
-        Vec3::Z, -Vec3::Z, RayColor::RED
+        Vec3::Z, -Vec3::Z, Color::<f32>::default()
     );
 
     let ray2 = Ray::new(
-        Vec3::Z, Vec3::Z, RayColor::RED
+        Vec3::Z, Vec3::Z, Color::<f32>::default()
     );
 
     let plane = Plane::from_value(

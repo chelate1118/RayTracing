@@ -1,13 +1,14 @@
 #![allow(unused_imports)]
 use glam::Vec3;
+use crate::material::color::Color;
 use crate::object::Object;
 use crate::object::sphere::Sphere;
-use crate::ray::{Ray, RayColor};
+use crate::ray::Ray;
 
 #[test]
 fn reach_point() {
-    let ray = Ray::new(Vec3::ZERO, Vec3::X * 3.0, RayColor::R(255.0));
-    let ray2 = Ray::new(Vec3::ZERO, Vec3::X * -1.0, RayColor::R(255.0));
+    let ray = Ray::new(Vec3::ZERO, Vec3::X * 3.0, Color::<f32>::default());
+    let ray2 = Ray::new(Vec3::ZERO, Vec3::X * -1.0, Color::<f32>::default());
 
     let sphere = Sphere::new(
         Vec3::new(4.0, 4.0, 0.0),
@@ -27,8 +28,8 @@ fn reach_point() {
 
 #[test]
 fn reach_normal() {
-    let ray = Ray::new(Vec3::ZERO, Vec3::X * 3.0, RayColor::R(255.0));
-    let ray2 = Ray::new(Vec3::ZERO, Vec3::Y, RayColor::R(255.0));
+    let ray = Ray::new(Vec3::ZERO, Vec3::X * 3.0, Color::<f32>::default());
+    let ray2 = Ray::new(Vec3::ZERO, Vec3::Y, Color::<f32>::default());
 
     let sphere = Sphere::new(
         Vec3::new(4.0, 4.0, 0.0),

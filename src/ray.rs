@@ -7,47 +7,18 @@ use std::f32::*;
 pub(crate) struct Ray {
     pub(crate) source: Vec3,
     pub(crate) direction: Vec3,
-    pub(crate) color: RayColor,
+    pub(crate) color: Color<f32>,
     pub(crate) reached_light: bool,
     pub(crate) reflect_count: u32,
 }
 
 impl Ray {
-    pub(crate) fn new(source: Vec3, direction: Vec3, color: RayColor) -> Self {
+    pub(crate) fn new(source: Vec3, direction: Vec3, color: Color<f32>) -> Self {
         Ray { source, direction, color, reached_light: false, reflect_count: 0 }
     }
 
     pub(crate) fn is_done(&self, reflect_count: u32) -> bool {
         self.reflect_count >= reflect_count || self.reached_light
-    }
-}
-
-#[derive(Clone, Copy, PartialEq, Debug)]
-pub(crate) enum RayColor {
-    R(f32),
-    G(f32),
-    B(f32)
-}
-
-impl RayColor {
-    pub(crate) const RED: RayColor = RayColor::R(1.0);
-    pub(crate) const GREEN: RayColor = RayColor::G(1.0);
-    pub(crate) const BLUE: RayColor = RayColor::B(1.0);
-
-    pub(crate) fn mix_color(&self, surface_color: Color<f32>) -> RayColor {
-        match self {
-            RayColor::R(r) => RayColor::R(r * surface_color.r),
-            RayColor::G(g) => RayColor::G(g * surface_color.g),
-            RayColor::B(b) => RayColor::B(b * surface_color.b)
-        }
-    }
-
-    pub(crate) fn get_value(&self, bright: f32) -> f32 {
-        bright * match self {
-            RayColor::R(r) => *r,
-            RayColor::G(g) => *g,
-            RayColor::B(b) => *b
-        }
     }
 }
 
