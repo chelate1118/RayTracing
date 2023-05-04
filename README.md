@@ -17,6 +17,7 @@ Supported light sources:
 
 ## Upcoming features
 
-1. Cube object
-2. Glass material
-3. CUDA GPU support
+1. Denoising
+2. Cube object
+3. Glass material
+4. CUDA GPU support
