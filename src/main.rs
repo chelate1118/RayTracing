@@ -24,7 +24,13 @@ fn main() {
         map.render_one_step(&mut screen);
 
         if sample % map.config.export_frame == 0 {
-            let file_name = format!("render/{file_name}/render_{sample}.png");
+            let file_name = 
+                if cfg!(feature = "bmp") {
+                    format!("render/{file_name}/render_{sample}.bmp")
+                }
+                else {
+                    format!("render/{file_name}/render_{sample}.png")
+                };
 
             export::screen_to_png(&screen, sample as i32, &file_name);
         }
