@@ -9,7 +9,7 @@ mod test;
 
 use std::{fs, env, io::Write};
 
-fn main() {
+pub fn test() {
     let start_time = std::time::Instant::now();
     let mut before_time = start_time;
     let file_name = env::args().last().unwrap();
