@@ -5,6 +5,7 @@ mod loader;
 mod map;
 mod export;
 mod math;
+mod gpu;
 mod test;
 
 use std::{fs, env, io::Write};

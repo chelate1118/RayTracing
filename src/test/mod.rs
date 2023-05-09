@@ -2,6 +2,7 @@ mod ray;
 mod sphere;
 mod camera;
 mod plane;
+mod gpu;
 mod debug;
 
 #[allow(unused_macros)]
