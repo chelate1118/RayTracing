@@ -13,11 +13,9 @@ pub(crate) fn add_array_i32(arr1: &[i32], arr2: &[i32]) -> Vec<i32> {
     }
 
     let sum;
-    let s = std::time::Instant::now();
 
     unsafe {
         let sum_ptr = add_array_int(arr1.as_ptr(), arr2.as_ptr(), length);
-        println!("{}", s.elapsed().as_millis());
         sum = std::slice::from_raw_parts(sum_ptr, length);
     }
 

@@ -7,6 +7,7 @@ fn main() {
         cc::Build::new()
             .cuda(true)
             .flag("-cudart=shared")
+            .flag("--expt-extended-lambda")
             .flag("-gencode")
             .flag("arch=compute_86,code=sm_86")
             .file(format!("cuda/{kernel}.cu"))
