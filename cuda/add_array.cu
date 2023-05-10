@@ -10,60 +10,70 @@ __global__ void addArrayInt(const int* arr1, const int* arr2, int* sum, usize le
         sum[i] = arr1[i] + arr2[i];
 }
 
+__host__ void safeCall(cudaError_t err, const char* message) {
+    if (err != cudaSuccess) {
+        fprintf(stderr, "%s (%s)", message, cudaGetErrorString(err));
+        exit(EXIT_FAILURE);
+    }
+}
+
+template<typename T>
+__host__ T* allocCudaMem(T* ptr, size_t size) {    
+    safeCall(
+        cudaMalloc((void**)&ptr, size),
+        "Failed to allocate device memory."
+    );
+
+    return ptr;
+}
+
+template<typename T>
+__host__ T* toCudaMem(const T* ptr, size_t size) {
+    T* copy_ptr = allocCudaMem((T*)NULL, size);
+
+    safeCall(
+        cudaMemcpy(copy_ptr, ptr, size, cudaMemcpyHostToDevice),
+        "Failed to copy memory from host to device."
+    );
+
+    return copy_ptr;
+}
+
+template<typename T>
+__host__ T* fromCudaMem(const T* ptr, size_t size) {
+    T* host_ptr = (T*)malloc(size);
+
+    safeCall(
+        cudaMemcpy(host_ptr, ptr, size, cudaMemcpyDeviceToHost),
+        "Failed to copy memory from device to host."
+    );
+
+    return host_ptr;
+}
+
 extern "C" {
     int* add_array_int(const int* arr1, const int* arr2, usize length) {
         size_t size = sizeof(float) * length;
 
-        int* sum = (int*)malloc(size);
+        int* copy1 = toCudaMem(arr1, size);
+        int* copy2 = toCudaMem(arr2, size);
+        int* copy_sum = allocCudaMem((int*)NULL, size);
 
-        int* copy1 = NULL;
-        int* copy2 = NULL;
-        int* copy_sum = NULL;
-
-        auto err1 = cudaMalloc((void**)&copy1, size);
-        auto err2 = cudaMalloc((void**)&copy2, size);
-        auto err3 = cudaMalloc((void**)&copy_sum, size);
-
-        if (err1 != cudaSuccess || err2 != cudaSuccess || err3 != cudaSuccess) {
-            fprintf(stderr, "Failed to allocate device array");
-            exit(EXIT_FAILURE);
-        }
-
-        err1 = cudaMemcpy(copy1, arr1, size, cudaMemcpyHostToDevice);
-        err2 = cudaMemcpy(copy2, arr2, size, cudaMemcpyHostToDevice);
-
-        if (err1 != cudaSuccess || err2 != cudaSuccess) {
-            fprintf(stderr, "Failed to copy host to device");
-            exit(EXIT_FAILURE);
-        }
-
-        int threadsPerBlock = 1024;
-        int blocksPerGrid = (length - 1) / threadsPerBlock + 1;
+        int blocksPerGrid = 1<<10;
+        int threadsPerBlock = (length - 1) / blocksPerGrid + 1;
 
         addArrayInt<<<threadsPerBlock, blocksPerGrid>>>(copy1, copy2, copy_sum, length);
 
-        err1 = cudaGetLastError();
+        safeCall(
+            cudaGetLastError(),
+            "Failed to launch kernel: addArrayInt"
+        );
 
-        if (err1 != cudaSuccess) {
-            fprintf(stderr, "Failed to launch kernel");
-            exit(EXIT_FAILURE);
-        }
+        int* sum = fromCudaMem(copy_sum, size);
 
-        err1 = cudaMemcpy(sum, copy_sum, size, cudaMemcpyDeviceToHost);
-
-        if (err1 != cudaSuccess) {
-            fprintf(stderr, "Failed to copy device to host");
-            exit(EXIT_FAILURE);
-        }
-
-        err1 = cudaFree(copy1);
-        err2 = cudaFree(copy2);
-        err3 = cudaFree(copy_sum);
-
-        if (err1 != cudaSuccess || err2 != cudaSuccess || err3 != cudaSuccess) {
-            fprintf(stderr, "Failed to free device");
-            exit(EXIT_FAILURE);
-        }
+        safeCall(cudaFree(copy1), "Failed to free device");
+        safeCall(cudaFree(copy2), "Failed to free device");
+        safeCall(cudaFree(copy_sum), "Failed to free device");
 
         cudaDeviceReset();
 
