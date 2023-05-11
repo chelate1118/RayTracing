@@ -9,7 +9,7 @@ pub(crate) fn add_array_i32(arr1: &[i32], arr2: &[i32]) -> Vec<i32> {
     let length = arr1.len();
 
     if length != arr2.len() {
-        panic!("Can't add two arrays of differenct sizes.");
+        panic!("Can't add two arrays of different sizes.");
     }
 
     let sum;
