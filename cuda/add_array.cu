@@ -18,7 +18,9 @@ __host__ void safeCall(cudaError_t err, const char* message) {
 }
 
 template<typename T>
-__host__ T* allocCudaMem(T* ptr, size_t size) {    
+__host__ T* allocCudaMem(size_t size) {    
+    T* ptr = NULL;
+
     safeCall(
         cudaMalloc((void**)&ptr, size),
         "Failed to allocate device memory."
@@ -29,7 +31,7 @@ __host__ T* allocCudaMem(T* ptr, size_t size) {
 
 template<typename T>
 __host__ T* toCudaMem(const T* ptr, size_t size) {
-    T* copy_ptr = allocCudaMem((T*)NULL, size);
+    T* copy_ptr = allocCudaMem<T>(size);
 
     safeCall(
         cudaMemcpy(copy_ptr, ptr, size, cudaMemcpyHostToDevice),
@@ -57,7 +59,7 @@ extern "C" {
 
         int* copy1 = toCudaMem(arr1, size);
         int* copy2 = toCudaMem(arr2, size);
-        int* copy_sum = allocCudaMem((int*)NULL, size);
+        int* copy_sum = allocCudaMem<int>(size);
 
         int blocksPerGrid = 1<<10;
         int threadsPerBlock = (length - 1) / blocksPerGrid + 1;
