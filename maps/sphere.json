@@ -2,7 +2,7 @@
 	"config": {
 		"reflect": 12,
 		"render": 1024,
-		"export": 8,
+		"export": 1,
 		"bright": 2.0
 	},
     "camera": {
@@ -27,6 +27,16 @@
 				"rough": 1
             }
         ],
+		"glass_sphere": [
+            {
+				"center": [-32, 32, 0],
+				"radius": 20,
+				"color": [255, 255, 255],
+				"rough": 0.04,
+				"reflect": 0,
+				"refractive": 1.5
+			}
+		],
         "normal_sphere": [
             {
 				"center": [0, 0, 0],
@@ -36,12 +46,6 @@
 			},
             {
 				"center": [32, 32, 0],
-				"radius": 20,
-				"color": [255, 255, 255],
-				"rough": 0.04
-			},
-            {
-				"center": [-32, 32, 0],
 				"radius": 20,
 				"color": [255, 255, 255],
 				"rough": 0.04

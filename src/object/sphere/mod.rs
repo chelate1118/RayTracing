@@ -1,5 +1,6 @@
 pub(crate) mod normal_sphere;
 pub(crate) mod light_sphere;
+pub(crate) mod glass_sphere;
 
 use glam::Vec3;
 use crate::ray::Ray;

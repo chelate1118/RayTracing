@@ -1,7 +1,7 @@
 use serde::Deserialize;
 use serde_json::Value;
 
-use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::LightSphere}, plane::Plane, sun::Sun}, ray::Ray, loader::FromValue};
+use crate::{object::{Object, sphere::{normal_sphere::NormalSphere, light_sphere::LightSphere, glass_sphere::GlassSpere}, plane::Plane, sun::Sun}, ray::Ray, loader::FromValue};
 
 pub(crate) struct World {
     pub(crate) objects: Vec<Box<dyn Object>>
@@ -31,6 +31,12 @@ impl FromValue for World {
         if let Some(light_spheres) = wi.light_sphere {
             for light_sphere in light_spheres.iter() {
                 objects.push(Box::new(LightSphere::from_value(light_sphere.to_owned())?))
+            }
+        }
+
+        if let Some(glass_spheres) = wi.glass_sphere {
+            for glass_sphere in glass_spheres.iter() {
+                objects.push(Box::new(GlassSpere::from_value(glass_sphere.to_owned())?))
             }
         }
 
@@ -74,4 +80,5 @@ struct WorldInfo {
     plane: Option<Vec<Value>>,
     normal_sphere: Option<Vec<Value>>,
     light_sphere: Option<Vec<Value>>,
+    glass_sphere: Option<Vec<Value>>
 }
