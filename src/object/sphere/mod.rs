@@ -29,7 +29,14 @@ impl Sphere {
         }
 
         let dot_product: f32 = Vec3::dot(source_to_center, normalized_dir);
-        let reach_distance: f32 = dot_product - (self.radius.powi(2) - light_dist.powi(2)).sqrt();
+        let is_from_inside = source_to_center.length() <= self.radius;
+        let half_chord = (self.radius.powi(2) - light_dist.powi(2)).sqrt();
+
+        let reach_distance: f32 = if is_from_inside {
+            dot_product + half_chord
+        } else {
+            dot_product - half_chord
+        };
 
         if dot_product < 0.0 || reach_distance <= 0.0 {
             return None;

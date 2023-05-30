@@ -27,6 +27,7 @@ pub(crate) trait Optics {
     fn reflect_from(self, normal: Vec3) -> Self;
     fn dispersion(self, gaussian: Gaussian<f32>) -> Self;
     fn random_orthonormal(self) -> Self;
+    fn rotate_from_axis_angle(self, axis: Vec3, angle: f32) -> Self;
 }
 
 impl Optics for Vec3 {
@@ -37,9 +38,8 @@ impl Optics for Vec3 {
     fn dispersion(self, rough: Gaussian<f32>) -> Self {        
         let rotate_axis = self.random_orthonormal();
         let angle = rough.sample(&mut rand::thread_rng());
-        let quat = Quat::from_axis_angle(rotate_axis, angle);
-
-        quat.mul_vec3(self)
+        
+        self.rotate_from_axis_angle(rotate_axis, angle)
     }
 
     fn random_orthonormal(self) -> Self {
@@ -47,5 +47,11 @@ impl Optics for Vec3 {
         let angle = rand::random::<f32>() * Self::TWO_PI;
 
         unit_x * angle.sin() + unit_y * angle.cos()
+    }
+
+    fn rotate_from_axis_angle(self, axis: Vec3, angle: f32) -> Self {
+        let quat = Quat::from_axis_angle(axis, angle);
+
+        quat.mul_vec3(self)
     }
 }

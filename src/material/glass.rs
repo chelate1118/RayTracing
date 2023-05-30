@@ -1,4 +1,6 @@
-use glam::{Vec3, Quat};
+use std::f32::consts::PI;
+
+use glam::Vec3;
 use rand_distr::{Normal as Gaussian, Bernoulli, Distribution};
 
 use crate::ray::{Ray, Optics};
@@ -26,10 +28,10 @@ impl Glass {
             panic!("Glass color value must be less than 255.0.");
         }
 
-        let color = color / 255.0;
+        let normalized_color = color / 255.0;
 
         Glass {
-            color,
+            color: normalized_color,
             rough: Gaussian::new(0.0, rough).unwrap(),
             reflect: Bernoulli::new(reflect).unwrap(),
             refractive,
@@ -50,31 +52,38 @@ impl Material for Glass {
 
 impl Glass {
     fn refraction(&self, ray: Ray, normal: Vec3, point: Vec3) -> Ray {
-        let coeff = if Self::is_from_outside(ray, normal) {
+        let is_from_outside = Self::is_from_outside(ray, normal);
+
+        let refractive_ratio = if is_from_outside {
             1.0 / self.refractive
         } else {
             self.refractive
         };
 
-        let input_angle = Vec3::angle_between(normal, ray.direction);
-        let output_angle = f32::asin(input_angle.sin() * coeff);
-        let rotate_axis = Vec3::cross(ray.direction, normal);
+        let mut input_angle = Vec3::angle_between(normal, ray.direction);
+        if is_from_outside { input_angle -= PI/2.0; }
 
-        let diff_angle = input_angle - output_angle;
-
-        let quat = Quat::from_axis_angle(rotate_axis, diff_angle);
-
-        let mut direction = quat.mul_vec3(ray.direction);
-
-        direction = direction.dispersion(self.rough);
-        while is_invalid_refract(ray.direction, direction, normal) {
-            direction = direction.dispersion(self.rough);
+        let output_angle = Self::get_output_angle(input_angle, refractive_ratio);
+        
+        if output_angle.is_none() {
+            return self.normal.reflect(ray, normal, point);
         }
+
+        let output_angle = output_angle.unwrap();
+
+        let rotate_axis = Vec3::cross(ray.direction, normal);
+        let mut diff_angle = output_angle - input_angle;
+        if !is_from_outside { diff_angle *= -1.0; }
+
+        let direction = ray.direction
+                .rotate_from_axis_angle(rotate_axis, diff_angle)
+                .dispersion(self.rough);
 
         let source = point;
         let color = ray.color * self.color;
         let reached_light = ray.reached_light;
-        let reflect_count = ray.reflect_count + 1;
+        let reflect_count = ray.reflect_count
+            + if is_from_outside { 1 } else { 0 };
 
         Ray {
             source,
@@ -88,8 +97,14 @@ impl Glass {
     fn is_from_outside(ray: Ray, normal: Vec3) -> bool {
         normal.dot(ray.direction) < 0.0
     }
-}
 
-fn is_invalid_refract(before: Vec3, after: Vec3, normal: Vec3) -> bool {
-    before.dot(normal) * after.dot(normal) < 0.0
+    fn get_output_angle(input_angle: f32, refractive: f32) -> Option<f32> {
+        let sin = input_angle.sin() * refractive;
+
+        if sin.abs() > 1.0 {
+            None
+        } else {
+            Some(sin.asin())
+        }
+    }
 }
