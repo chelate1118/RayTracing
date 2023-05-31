@@ -9,4 +9,6 @@ Cargo.lock
 
 .vscode/
 
+*.out
+
 render/
