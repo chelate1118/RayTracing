@@ -1,6 +1,6 @@
 # Ray Tracing
 
-3D graphics project written by Rust, based on ray tracing.
+3D graphics project written in Rust, based on ray tracing.
 Load map from json file.
 
 Supported objects:
