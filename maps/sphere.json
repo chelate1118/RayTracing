@@ -2,7 +2,7 @@
 	"config": {
 		"reflect": 12,
 		"render": 1024,
-		"export": 1,
+		"export": 8,
 		"bright": 2.0
 	},
     "camera": {
